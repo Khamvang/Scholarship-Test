@@ -144,7 +144,6 @@ function processSubmission(formObject) {
                   totalScore, statusText]);
 
 
-
   // ສົ່ງຂໍ້ຄວາມກັບຄືນໄປຫາໜ້າຈໍນັກຮຽນ
   if (passed) {
     return "ຂໍສະແດງຄວາມຍິນດີ! ທ່ານເສັງຜ່ານ ກະລຸນາຂຶ້ນມາຮັບທຶນການສຶກສາຢູ່ທາງໜ້າ.";
