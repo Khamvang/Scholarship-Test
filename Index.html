@@ -218,8 +218,16 @@
           elementsArray[i] = elementsArray[j];
           elementsArray[j] = temp;
         }
-        
+
         elementsArray.forEach(function(element){ container.appendChild(element); });
+
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          google.script.run.withSuccessHandler(function(dataUrl) {
+            if (dataUrl) {
+              document.body.style.backgroundImage = "linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('" + dataUrl + "')";
+            }
+          }).getBackgroundImageData();
+        }
 
         var bgInput = document.getElementById('bgImage');
         if (bgInput) {

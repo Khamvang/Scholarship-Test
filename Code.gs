@@ -5,6 +5,21 @@ function doGet() {
       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
+function getBackgroundImageData() {
+  var folderId = '182XU72FN6FtWc9AmzHDfj3DAS6-kRwOn';
+  var fileName = 'form_background.png';
+  var folder = DriveApp.getFolderById(folderId);
+  var files = folder.getFilesByName(fileName);
+  if (!files.hasNext()) {
+    return '';
+  }
+  var file = files.next();
+  var blob = file.getBlob();
+  var contentType = blob.getContentType();
+  var encoded = Utilities.base64Encode(blob.getBytes());
+  return 'data:' + contentType + ';base64,' + encoded;
+}
+
 function processSubmission(formObject) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
@@ -118,5 +133,4 @@ function processSubmission(formObject) {
     return "ຂໍສະແດງຄວາມເສຍໃຈ, ທ່ານຍັງບໍ່ຜ່ານໃນຄັ້ງນີ້. ຂອບໃຈທີ່ເຂົ້າຮ່ວມ.";
   }
 }
-
 
