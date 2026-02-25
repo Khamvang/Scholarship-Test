@@ -4,7 +4,7 @@
     <base target="_top">
     <meta charset="UTF-8">
     <style>
-      body { font-family: "Phetsarath OT", Arial, sans-serif; padding: 20px; max-width: 650px; margin: auto; background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%201200%20800%27%3E%0A%3Crect%20width%3D%271200%27%20height%3D%27800%27%20fill%3D%27%23e8f1ff%27/%3E%0A%3Crect%20x%3D%27220%27%20y%3D%27180%27%20width%3D%27760%27%20height%3D%27440%27%20rx%3D%2724%27%20fill%3D%27%23ffffff%27%20stroke%3D%27%230056b3%27%20stroke-width%3D%278%27/%3E%0A%3Cpath%20d%3D%27M300%20260%20h320%20l-40%2050%20h-320z%27%20fill%3D%27%23cddff7%27/%3E%0A%3Ctext%20x%3D%27360%27%20y%3D%27360%27%20font-family%3D%22Phetsarath%20OT%2C%20Arial%22%20font-size%3D%2748%27%20fill%3D%27%230056b3%27%3E%E0%BA%9A%E0%BA%BB%E0%BA%94%E0%BA%AA%E0%BA%AD%E0%BA%9A%E0%BA%97%E0%BA%B6%E0%BA%99%E0%BA%81%E0%BA%B2%E0%BA%99%E0%BA%AA%E0%BA%B6%E0%BA%81%E0%BA%AA%E0%BA%B2%3C/text%3E%0A%3Ctext%20x%3D%27360%27%20y%3D%27420%27%20font-family%3D%22Phetsarath%20OT%2C%20Arial%22%20font-size%3D%2728%27%20fill%3D%27%23444444%27%3EScholarship%20Aptitude%3C/text%3E%0A%3C/svg%3E'); background-size: cover; background-attachment: fixed; background-position: center;}
+      body { font-family: "Phetsarath OT", Arial, sans-serif; padding: 20px; max-width: 650px; margin: auto; background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)); background-size: cover; background-attachment: fixed; background-position: center;}
       .header { text-align: center; margin-bottom: 30px; }
       .header p { color: #0056b3; margin-top: 8px; }
       .section-title { font-size: 1.2em; color: #333; border-bottom: 2px solid #0056b3; padding-bottom: 5px; margin-top: 30px;}
@@ -29,6 +29,12 @@
     
     <form id="testForm">
       
+      <div class="question-block">
+        <label>ຮູບພາບພື້ນຫຼັງ (ທ່ານເລືອກເອງ)</label><br>
+        <small style="color: gray;">(ຮູບນີ້ໃຊ້ເພື່ອສະແດງໜ້າເວັບຂອງທ່ານ ບໍ່ຖືກອັບໂຫຼດອອນໄລນ໌)</small>
+        <input type="file" id="bgImage" accept="image/*" style="margin-top: 10px;">
+      </div>
+
       <div class="section-title">ຂໍ້ມູນສ່ວນຕົວ</div>
 
       <div class="question-block">
@@ -214,6 +220,22 @@
         }
         
         elementsArray.forEach(function(element){ container.appendChild(element); });
+
+        var bgInput = document.getElementById('bgImage');
+        if (bgInput) {
+          bgInput.addEventListener('change', function(event) {
+            var file = event.target.files[0];
+            if (file) {
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                document.body.style.backgroundImage = "linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('" + e.target.result + "')";
+              };
+              reader.readAsDataURL(file);
+            } else {
+              document.body.style.backgroundImage = "";
+            }
+          });
+        }
       };
 
       // ຟັງຊັນຈັດການການສົ່ງຂໍ້ມູນແລະແປງຮູບພາບ
