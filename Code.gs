@@ -45,6 +45,20 @@ function processSubmission(formObject) {
 
 
   var fileUrl = "ບໍ່ຮັບຮູບພາບ";
+  if (formObject.iqProofData) {
+    var match = formObject.iqProofData.match(/^data:(.+);base64,(.+)$/);
+    if (match) {
+      var contentType = match[1];
+      var bytes = Utilities.base64Decode(match[2]);
+      var fileName = formObject.iqProofName || "iq_proof";
+      var blob = Utilities.newBlob(bytes, contentType, fileName);
+      var folders = DriveApp.getFoldersByName("IQ Uploads");
+      var folder = folders.hasNext() ? folders.next() : DriveApp.createFolder("IQ Uploads");
+      var file = folder.createFile(blob);
+      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+      fileUrl = file.getUrl();
+    }
+  }
 
   // ກວດຄຳຕອບ Q8, Q9 ແລະ Q10
   var q8Answer = formObject.q8;

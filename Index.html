@@ -87,6 +87,11 @@
         </select>
       </div>
 
+      <div class="question-block">
+        <label>Q7: ອັບໂຫຼດພາບຜົນເສັງ IQ (PNG/JPG)</label>
+        <input type="file" id="iqProof" name="iqProof" accept="image/*" required>
+      </div>
+
       <div class="section-title">I. ພາກຄິດໄລ່(ຂໍ້ລະ10ຄະແນນ)</div>
 
       <div id="shuffledQuestions">
@@ -233,28 +238,48 @@
         btn.innerText = "ກຳລັງສົ່ງຂໍ້ມູນ ແລະ ປະມວນຜົນ...";
 
 
-        // ກຽມຂໍ້ມູນ
-        var formObject = {
-          studentName: form.studentName.value,
-          phone: form.phone.value,
-          gender: form.gender.value,
-          year: form.year.value,
-          university: form.university.value,
-          iqScore: form.iqScore.value,
-          q8: form.querySelector('input[name="q8"]:checked').value,
-          q9: form.querySelector('input[name="q9"]:checked').value,
-          q10: form.querySelector('input[name="q10"]:checked').value,
-          q11: form.querySelector('input[name="q11"]:checked').value,
-          q12: form.querySelector('input[name="q12"]:checked').value,
-          q13: form.querySelector('input[name="q13"]:checked').value,
-          q14: form.querySelector('input[name="q14"]:checked').value,
-          q15: form.querySelector('input[name="q15"]:checked').value,
-          q16: form.querySelector('input[name="q16"]:checked').value,
-          q17: form.querySelector('input[name="q17"]:checked').value,
-          q18: form.querySelector('input[name="q18"]:checked').value
+        var fileInput = document.getElementById('iqProof');
+        var file = fileInput.files[0];
+
+        var buildAndSend = function(fileDataUrl) {
+          var formObject = {
+            studentName: form.studentName.value,
+            phone: form.phone.value,
+            gender: form.gender.value,
+            year: form.year.value,
+            university: form.university.value,
+            iqScore: form.iqScore.value,
+            iqProofData: fileDataUrl,
+            iqProofName: file ? file.name : "",
+            iqProofType: file ? file.type : "",
+            q8: form.querySelector('input[name="q8"]:checked').value,
+            q9: form.querySelector('input[name="q9"]:checked').value,
+            q10: form.querySelector('input[name="q10"]:checked').value,
+            q11: form.querySelector('input[name="q11"]:checked').value,
+            q12: form.querySelector('input[name="q12"]:checked').value,
+            q13: form.querySelector('input[name="q13"]:checked').value,
+            q14: form.querySelector('input[name="q14"]:checked').value,
+            q15: form.querySelector('input[name="q15"]:checked').value,
+            q16: form.querySelector('input[name="q16"]:checked').value,
+            q17: form.querySelector('input[name="q17"]:checked').value,
+            q18: form.querySelector('input[name="q18"]:checked').value
+          };
+
+          sendToBackend(formObject);
         };
 
-        sendToBackend(formObject);
+        if (file) {
+          var reader = new FileReader();
+          reader.onload = function(e) { buildAndSend(e.target.result); };
+          reader.onerror = function() {
+            alert("ອ່ານໄຟລ໌ບໍ່ສຳເລັດ, ກະລຸນາລອງໃໝ່.");
+            btn.disabled = false;
+            btn.innerText = "ສົ່ງບົດເສັງ";
+          };
+          reader.readAsDataURL(file);
+        } else {
+          buildAndSend(null);
+        }
       }
 
 
