@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="lo">
+  <head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <style>
+      body { font-family: Arial, sans-serif; padding: 20px; max-width: 650px; margin: auto; background-color: #f9f9f9;}
+      .header { text-align: center; margin-bottom: 30px; }
+      .section-title { font-size: 1.2em; color: #333; border-bottom: 2px solid #0056b3; padding-bottom: 5px; margin-top: 30px;}
+      .question-block { background: white; margin-bottom: 15px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+      input[type="text"], select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;}
+      input[type="radio"] { margin-right: 8px; }
+      label { font-weight: bold; color: #444;}
+      .radio-option { margin-top: 8px; display: block;}
+      button { padding: 12px 25px; background-color: #0056b3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 20px;}
+      button:disabled { background-color: #cccccc; }
+      #resultMessage { margin-top: 20px; font-size: 1.3em; font-weight: bold; display: none; padding: 20px; border-radius: 5px; text-align: center;}
+      .pass { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;}
+      .fail { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;}
+    </style>
+  </head>
+  <body>
+
+    <div class="header">
+      <h2>ບົດສອບເສັງທຶນການສຶກສາ</h2>
+    </div>
+    
+    <form id="testForm">
+      
+      <div class="section-title">ຂໍ້ມູນສ່ວນຕົວ</div>
+
+      <div class="question-block">
+        <label>Q1: ຊື່ ແລະ ນາມສະກຸນ</label>
+        <input type="text" name="studentName" required>
+      </div>
+
+      <div class="question-block">
+        <label>Q2: ເບີໂທລະສັບ</label>
+        <input type="text" name="phone" required>
+      </div>
+
+      <div class="question-block">
+        <label>Q3: ເພດ</label>
+        <div class="radio-option"><input type="radio" name="gender" value="ຊາຍ" required> ຊາຍ</div>
+        <div class="radio-option"><input type="radio" name="gender" value="ຍິງ"> ຍິງ</div>
+      </div>
+
+      <div class="question-block">
+        <label>Q4: ນັກສຶກສາປີທີ</label>
+        <select name="year" required>
+          <option value="" disabled selected>ເລືອກປີຮຽນ</option>
+          <option value="ປີ1">ປີ1</option>
+          <option value="ປີ2">ປີ2</option>
+          <option value="ປີ3">ປີ3</option>
+          <option value="ປີ4">ປີ4</option>
+          <option value="ປີ5">ປີ5</option>
+        </select>
+      </div>
+
+      <div class="question-block">
+        <label>Q5: ນັກສຶກສາຈາກມະຫາວິທະຍາໄລ</label>
+        <select name="university" required>
+          <option value="" disabled selected>ເລືອກສະຖາບັນ</option>
+          <option value="ມະຫາວິທະຍາໄລແຫ່ງຊາດລາວ">ມະຫາວິທະຍາໄລແຫ່ງຊາດລາວ</option>
+          <option value="ສະຖາບັນການທະນາຄານ">ສະຖາບັນການທະນາຄານ</option>
+          <option value="ສະຖາບັນຣັດຕະນະບໍລິຫານທຸລະກິດ">ສະຖາບັນຣັດຕະນະບໍລິຫານທຸລະກິດ</option>
+          <option value="ວິທະຍາໄລ ລາວອາເມຣິກາ">ວິທະຍາໄລ ລາວອາເມຣິກາ</option>
+          <option value="ມະຫາວິທະຍາໄລສຸພານຸວົງ">ມະຫາວິທະຍາໄລສຸພານຸວົງ</option>
+          <option value="ມະຫາວິທະຍາໄລສະຫວັນນະເຂດ">ມະຫາວິທະຍາໄລສະຫວັນນະເຂດ</option>
+          <option value="ມະຫາວິທະຍາໄລຈຳປາສັກ">ມະຫາວິທະຍາໄລຈຳປາສັກ</option>
+        </select>
+      </div>
+
+      <div class="section-title">ການທົດສອບ IQ</div>
+
+      <div class="question-block">
+        <label>Q6: ຄະແນນເສັງ IQ</label>
+        <select name="iqScore" required>
+          <option value="" disabled selected>ເລືອກຊ່ວງຄະແນນຂອງທ່ານ</option>
+          <option value="140+">140+</option>
+          <option value="120–139">120–139</option>
+          <option value="100–119">100–119</option>
+          <option value="80–99">80–99</option>
+          <option value="60–79">60–79</option>
+          <option value="ຕ່ຳກວ່າ 60">ຕ່ຳກວ່າ 60</option>
+        </select>
+      </div>
+
+      <div class="question-block">
+        <label>Q7: ອັບໂຫຼດຮູບຄະແນນ IQ</label><br>
+        <small style="color: gray;">(ກະລຸນາເລືອກຮູບພາບຢືນຢັນຄະແນນຂອງທ່ານ)</small>
+        <input type="file" id="iqImage" accept="image/*" required style="margin-top: 10px;">
+      </div>
+
+
+
+      <div class="section-title">I. ພາກຄິດໄລ່(ຂໍ້ລະ10ຄະແນນ)</div>
+
+      <div id="shuffledQuestions">
+        
+        <div class="question-block shuffle-item">
+          <label>Q8: 1. ປ່ອຍກູ້ 10,000 USD ຕໍ່ເດືອນ ອັດຕາ 2% (ດອກເບ້ຍທົ່ວໄປ) ເປັນເວລາ 6 ເດືອນ. ດອກເບ້ຍທັງໝົດ 6 ເດືອນແມ່ນເທົ່າໃດ?</label>
+          <div class="radio-option"><input type="radio" name="q8" value="A. 1200" required> A. 1200</div>
+          <div class="radio-option"><input type="radio" name="q8" value="B. 2000"> B. 2000</div>
+          <div class="radio-option"><input type="radio" name="q8" value="C. 2500"> C. 2500</div>
+          <div class="radio-option"><input type="radio" name="q8" value="D. 3000"> D. 3000</div>
+        </div>
+
+
+        <div class="question-block shuffle-item">
+          <label>Q9: 2. ພວກເຮົາຈະປ່ອຍເງິນກູ້ໃຫ້ທ່ານ 24,000 USD ເປັນເວລາ 12 ເດືອນ. ນອກຈາກດອກເບັ້ຍແລ້ວ. ຈຳນວນເງິນທີ່ຕ້ອງຊຳ(ຕົ້ນທຶນ)ແມ່ນເທົ່າ ກັນທຸກໆເດືອນ ເພື່ອໃຫ້ ຈໍານວນເງິນຕົ້ນທຶນຈະເປັນສູນຫຼັງຈາກ 12 ເດືອນ. ເງິນຕົ້ນເຫຼືອເທົ່າໃດຫຼັງຈາກ 5 ເດືອນ?</label>
+          <div class="radio-option"><input type="radio" name="q9" value="A. 20,000" required> A. 20,000</div>
+          <div class="radio-option"><input type="radio" name="q9" value="B. 18,000"> B. 18,000</div>
+          <div class="radio-option"><input type="radio" name="q9" value="C. 16,000"> C. 16,000</div>
+          <div class="radio-option"><input type="radio" name="q9" value="D. 14,000"> D. 14,000</div>
+        </div>
+
+
+        <div class="question-block shuffle-item">
+          <label>Q10: 3. ພວກເຮົາ ໃຫ້ກູ້ຢືມ ແກ່ ລູກຄ້າ, ໂດຍໃຊ້ລົດ ເປັນຫຼັກຊັບຄ້ຳປະກັນ ພວກເຮົາປະເມີນມູນຄ່າລົດໄດ້ 20,000 USD ແຕ່ລູກຄ້າຕ້ອງການກູ້ຢືມ 50,000 USD. 
+            ພວກເຮົາສາມາດຍອມໃຫ້ສິນເຊື່ອ 50,000 USD ໄດ້ບໍ? </label>
+          <div class="radio-option"><input type="radio" name="q10" value="A. ໄດ້" required> A. ໄດ້</div>
+          <div class="radio-option"><input type="radio" name="q10" value="B. ບໍ່ໄດ້"> B. ບໍ່ໄດ້</div>
+        </div>
+        
+      </div>
+
+
+
+
+      <div class="section-title">II. ຈັນຍາບັນ (ໃນຕາຕະລາງຂໍ້ລະ1.25)(ແລະຍັງອີກ5ຂໍ້ແມ່ນຂໍ້ລະ2ຄະແນນ)</div>
+
+      <div id="shuffledQuestions">
+        
+        <div class="question-block shuffle-item">
+          <label>Q11: 1. ຂ້າພະເຈົ້າຄິດວ່າມັນບໍ່ເປັນບັນຫາທີ່ຈະເອົາອຸປະກອນຂະຫນາດນ້ອຍອອກຈາກຫ້ອງການ</label>
+          <div class="radio-option"><input type="radio" name="q11" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+          <div class="radio-option"><input type="radio" name="q11" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
+        </div>
+
+
+        <div class="question-block shuffle-item">
+          <label>Q12: 2. ຜົນໄດ້ຮັບແມ່ນສໍາຄັນກວ່າກົດລະບຽບ</label>
+          <div class="radio-option"><input type="radio" name="q12" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+          <div class="radio-option"><input type="radio" name="q12" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
+        </div>
+
+
+        <div class="question-block shuffle-item">
+          <label>Q13: 3. ຖ້າບໍ່ມີໃຜເບິ່ງເຈົ້າ, ເຈົ້າສາມາດບໍ່ເຮັດຕາມກົດລະບຽບໄດ້</label>
+          <div class="radio-option"><input type="radio" name="q13" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+          <div class="radio-option"><input type="radio" name="q13" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
+        </div>
+
+
+        <div class="question-block shuffle-item">
+          <label>Q14: 4. ທຸກຄັ້ງທີ່ເຈົ້າຖືກສັ່ງໃຫ້ໂກງ, ເຈົ້າຈະປະຕິເສດ</label>
+          <div class="radio-option"><input type="radio" name="q14" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+          <div class="radio-option"><input type="radio" name="q14" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
+        </div>
+
+
+        <div class="question-block shuffle-item">
+          <label>Q15: 5. ມັນບໍ່ເປັນຫຍັງທີ່ຈະເອົາທຸລະກິດຄອບຄົວຂອງເຈົ້າມາເຮັດຢູ່ບ່ອນເຮັດວຽກ</label>
+          <div class="radio-option"><input type="radio" name="q15" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+          <div class="radio-option"><input type="radio" name="q15" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
+        </div>
+
+
+        <div class="question-block shuffle-item">
+          <label>Q16: 6. ຢ່າເອົາຂໍ້ມູນຂອງລູກຄ້າເມື່ອທ່ານລາອອກຈາກບໍລິສັດ</label>
+          <div class="radio-option"><input type="radio" name="q16" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+          <div class="radio-option"><input type="radio" name="q16" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
+        </div>
+
+
+        <div class="question-block shuffle-item">
+          <label>Q17: 7. ຂໍໃຫ້ເພື່ອນຮ່ວມງານກົດບັດເຂົ້າວຽກແທນເພື່ອປິດບັງການມາວຽກຊ້າຂອງເຈົ້າ ມັນເປັນທີ່ຍອມຮັບໄດ້</label>
+          <div class="radio-option"><input type="radio" name="q17" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+          <div class="radio-option"><input type="radio" name="q17" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
+        </div>
+
+
+        <div class="question-block shuffle-item">
+          <label>Q18: 8. ບາງຄັ້ງມັນສະຫລາດກວ່າທີ່ຈະປິດບັງຄວາມລົ້ມເຫລວດີກ່ວາທີ່ການລາຍງານມັນກັບຫົວໜ້າຂອງເຈົ້າ</label>
+          <div class="radio-option"><input type="radio" name="q18" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+          <div class="radio-option"><input type="radio" name="q18" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
+        </div>
+
+        
+      </div>
+
+
+      <button type="button" id="submitBtn" onclick="handleFormSubmit()">ສົ່ງບົດເສັງ</button>
+    </form>
+
+    <div id="resultMessage"></div>
+
+    <script>
+      // ຟັງຊັນສະລັບຂໍ້ສອບ
+      window.onload = function() {
+        var container = document.getElementById('shuffledQuestions');
+        var elementsArray = Array.prototype.slice.call(container.getElementsByClassName('shuffle-item'));
+        
+        elementsArray.forEach(function(element){ container.removeChild(element); });
+        
+        for (var i = elementsArray.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = elementsArray[i];
+          elementsArray[i] = elementsArray[j];
+          elementsArray[j] = temp;
+        }
+        
+        elementsArray.forEach(function(element){ container.appendChild(element); });
+      };
+
+      // ຟັງຊັນຈັດການການສົ່ງຂໍ້ມູນແລະແປງຮູບພາບ
+      function handleFormSubmit() {
+        var form = document.getElementById('testForm');
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        var btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerText = "ກຳລັງສົ່ງຂໍ້ມູນ ແລະ ປະມວນຜົນ...";
+
+
+        // ກຽມຂໍ້ມູນ
+        var formObject = {
+          studentName: form.studentName.value,
+          phone: form.phone.value,
+          gender: form.gender.value,
+          year: form.year.value,
+          university: form.university.value,
+          iqScore: form.iqScore.value,
+          q8: form.querySelector('input[name="q8"]:checked').value,
+          q9: form.querySelector('input[name="q9"]:checked').value,
+          q10: form.querySelector('input[name="q10"]:checked').value,
+          q11: form.querySelector('input[name="q11"]:checked').value,
+          q12: form.querySelector('input[name="q12"]:checked').value,
+          q13: form.querySelector('input[name="q13"]:checked').value,
+          q14: form.querySelector('input[name="q14"]:checked').value,
+          q15: form.querySelector('input[name="q15"]:checked').value,
+          q16: form.querySelector('input[name="q16"]:checked').value,
+          q17: form.querySelector('input[name="q17"]:checked').value,
+          q18: form.querySelector('input[name="q18"]:checked').value,
+          imageFileBase64: "",
+          imageFileName: ""
+        };
+
+
+        // ຈັດການໄຟລ໌ຮູບພາບ
+        var fileInput = document.getElementById('iqImage');
+        if (fileInput.files.length > 0) {
+          var file = fileInput.files[0];
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            formObject.imageFileBase64 = e.target.result;
+            formObject.imageFileName = file.name;
+            sendToBackend(formObject);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          sendToBackend(formObject);
+        }
+      }
+
+
+      function sendToBackend(formObject) {
+        google.script.run
+          .withSuccessHandler(showResult)
+          .withFailureHandler(function(error) {
+             alert("ເກີດຂໍ້ຜິດພາດ: " + error.message);
+             document.getElementById('submitBtn').disabled = false;
+             document.getElementById('submitBtn').innerText = "ສົ່ງບົດເສັງໃໝ່";
+          })
+          .processSubmission(formObject);
+      }
+
+      // ສະແດງຜົນການສອບເສັງ
+      function showResult(message) {
+        document.getElementById('testForm').style.display = 'none';
+        var resultDiv = document.getElementById('resultMessage');
+        resultDiv.style.display = 'block';
+        resultDiv.innerText = message;
+        
+        if (message.includes("ຍິນດີ")) {
+          resultDiv.className = "pass";
+        } else {
+          resultDiv.className = "fail";
+        }
+      }
+    </script>
+  </body>
+</html>
