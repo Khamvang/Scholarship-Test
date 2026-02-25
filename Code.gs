@@ -116,11 +116,11 @@ function processSubmission(formObject) {
   if (q17Answer === "B. ບໍ່ແມ່ນ") { q17Points = 0.625; }
   if (q18Answer === "B. ບໍ່ແມ່ນ") { q18Points = 0.625; }
 
-  if (q19Answer === "B. ບໍ່ແມ່ນ") { q19Points = 1; }
-  if (q20Answer === "B. ບໍ່ແມ່ນ") { q20Points = 1; }
-  if (q21Answer === "B. ບໍ່ແມ່ນ") { q21Points = 1; }
-  if (q22Answer === "B. ບໍ່ແມ່ນ") { q22Points = 1; }
-  if (q23Answer === "B. ບໍ່ແມ່ນ") { q23Points = 1; }
+  if (q19Answer === "C. ທັນທີທັນໃດລາຍງານກັບຫົວຫນ້າຫຼືພະແນກກວດສອບ") { q19Points = 1; }
+  if (q20Answer === "B. ບັນທຶກແລະລາຍງານໂດຍບໍ່ມີການໄດ້ຮັບ") { q20Points = 1; }
+  if (q21Answer === "C. ເຜີຍແຜ່ ແລະ ລາຍງານດ້ວຍຕົວເອງທັນທີ") { q21Points = 1; }
+  if (q22Answer === "A. ກວດເບິ່ງກົດລະບຽບ ແລະ ຖາມຄໍາຖາມຕໍ່ກັບ ຫົວໜ້າຂອງທ່ານ") { q22Points = 1; }
+  if (q23Answer === "B. ຂໍໂທດກັບຫມູ່ເພື່ອນແລະປະຕິເສດ") { q23Points = 1; }
 
 
   // ລວມຄະແນນ
