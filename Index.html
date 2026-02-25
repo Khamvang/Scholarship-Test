@@ -87,14 +87,6 @@
         </select>
       </div>
 
-      <div class="question-block">
-        <label>Q7: ອັບໂຫຼດຮູບຄະແນນ IQ</label><br>
-        <small style="color: gray;">(ກະລຸນາເລືອກຮູບພາບຢືນຢັນຄະແນນຂອງທ່ານ)</small>
-        <input type="file" id="iqImage" accept="image/*" required style="margin-top: 10px;">
-      </div>
-
-
-
       <div class="section-title">I. ພາກຄິດໄລ່(ຂໍ້ລະ10ຄະແນນ)</div>
 
       <div id="shuffledQuestions">
@@ -213,6 +205,19 @@
         }
 
         elementsArray.forEach(function(element){ container.appendChild(element); });
+
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          google.script.run
+            .withSuccessHandler(function(dataUrl) {
+              if (dataUrl) {
+                document.body.style.background = 'linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(' + dataUrl + ')';
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundAttachment = 'fixed';
+                document.body.style.backgroundPosition = 'center';
+              }
+            })
+            .getBackgroundImageData();
+        }
       };
 
       // ຟັງຊັນຈັດການການສົ່ງຂໍ້ມູນແລະແປງຮູບພາບ
@@ -246,26 +251,10 @@
           q15: form.querySelector('input[name="q15"]:checked').value,
           q16: form.querySelector('input[name="q16"]:checked').value,
           q17: form.querySelector('input[name="q17"]:checked').value,
-          q18: form.querySelector('input[name="q18"]:checked').value,
-          imageFileBase64: "",
-          imageFileName: ""
+          q18: form.querySelector('input[name="q18"]:checked').value
         };
 
-
-        // ຈັດການໄຟລ໌ຮູບພາບ
-        var fileInput = document.getElementById('iqImage');
-        if (fileInput.files.length > 0) {
-          var file = fileInput.files[0];
-          var reader = new FileReader();
-          reader.onload = function(e) {
-            formObject.imageFileBase64 = e.target.result;
-            formObject.imageFileName = file.name;
-            sendToBackend(formObject);
-          };
-          reader.readAsDataURL(file);
-        } else {
-          sendToBackend(formObject);
-        }
+        sendToBackend(formObject);
       }
 
 
