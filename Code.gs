@@ -38,11 +38,12 @@ function processSubmission(formObject) {
   var iqChoice = formObject.iqScore;
   var iqPoints = 0;
   
-  if (iqChoice === "140+") { iqPoints = 10; }
-  else if (iqChoice === "120–139") { iqPoints = 8; }
-  else if (iqChoice === "100–119") { iqPoints = 6; }
-  else if (iqChoice === "80–99") { iqPoints = 4; }
-  else if (iqChoice === "60–79") { iqPoints = 2; }
+  if (iqChoice === "140+") { iqPoints = 60; }
+  else if (iqChoice === "120–139") { iqPoints = 60; }
+  else if (iqChoice === "110–119") { iqPoints = 55; }
+  else if (iqChoice === "100–109") { iqPoints = 50; }
+  else if (iqChoice === "80–99") { iqPoints = 0; }
+  else if (iqChoice === "60–79") { iqPoints = 0; }
   else if (iqChoice === "ຕ່ຳກວ່າ 60") { iqPoints = 0; }
 
 
@@ -76,6 +77,11 @@ function processSubmission(formObject) {
   var q16Answer = formObject.q16;
   var q17Answer = formObject.q17;
   var q18Answer = formObject.q18;
+  var q19Answer = formObject.q19;
+  var q20Answer = formObject.q20;
+  var q21Answer = formObject.q21;
+  var q22Answer = formObject.q22;
+  var q23Answer = formObject.q23;
 
   var q8Points = 0;
   var q9Points = 0;
@@ -88,6 +94,11 @@ function processSubmission(formObject) {
   var q16Points = 0;
   var q17Points = 0;
   var q18Points = 0;
+  var q19Points = 0;
+  var q20Points = 0;
+  var q21Points = 0;
+  var q22Points = 0;
+  var q23Points = 0;
 
 
 
@@ -105,11 +116,21 @@ function processSubmission(formObject) {
   if (q17Answer === "B. ບໍ່ແມ່ນ") { q17Points = 0.625; }
   if (q18Answer === "B. ບໍ່ແມ່ນ") { q18Points = 0.625; }
 
+  if (q19Answer === "B. ບໍ່ແມ່ນ") { q19Points = 1; }
+  if (q20Answer === "B. ບໍ່ແມ່ນ") { q20Points = 1; }
+  if (q21Answer === "B. ບໍ່ແມ່ນ") { q21Points = 1; }
+  if (q22Answer === "B. ບໍ່ແມ່ນ") { q22Points = 1; }
+  if (q23Answer === "B. ບໍ່ແມ່ນ") { q23Points = 1; }
 
 
   // ລວມຄະແນນ
-  var totalScore = iqPoints + (q8Points + q9Points + q10Points) + (q11Points + q12Points + q13Points + q14Points + q15Points + q16Points + q17Points + q18Points) ;
-  var passThreshold = 50; // ຕັ້ງຄ່າຄະແນນຜ່ານຢູ່ບ່ອນນີ້
+  var totalScore = iqPoints                                                                                         // 50 ຄະແນນ (ຖ້າໄດ້ IQ 100 ໄດ້ 50, IQ 110 ໄດ້ 55, IQ 120 ໄດ້ 60)
+                + (q8Points + q9Points + q10Points)                                                                 // 30 ຄະແນນ (ຂໍ້ລະ 10 ຄະແນນ)
+                + (q11Points + q12Points + q13Points + q14Points + q15Points + q16Points + q17Points + q18Points)   // 5 ຄະແນນ (ຂໍ້ລະ 0.625 ຄະແນນ)
+                + (q19Points + q20Points + q21Points + q22Points + q23Points)                                       // 5 ຄະແນນ (ຂໍ້ລະ 1 ຄະແນນ)
+                ;
+
+  var passThreshold = 100; // ຕັ້ງຄ່າຄະແນນຜ່ານຢູ່ບ່ອນນີ້
   var passed = totalScore >= passThreshold;
   var statusText = passed ? "ຜ່ານ" : "ຕົກ";
 
@@ -119,6 +140,7 @@ function processSubmission(formObject) {
   sheet.appendRow([new Date(), name, phone, gender, year, uni, iqChoice, iqPoints, fileUrl, 
                   q8Answer, q8Points, q9Answer, q9Points, q10Answer, q10Points, 
                   q11Answer, q11Points, q12Answer, q12Points, q13Answer, q13Points, q14Answer, q14Points, q15Answer, q15Points, q16Answer, q16Points, q17Answer, q17Points, q18Answer, q18Points,
+                  q19Answer, q19Points, q20Answer, q20Points, q21Answer, q21Points, q22Answer, q22Points, q23Answer, q23Points,
                   totalScore, statusText]);
 
 
@@ -130,3 +152,5 @@ function processSubmission(formObject) {
     return "ຂໍສະແດງຄວາມເສຍໃຈ, ທ່ານຍັງບໍ່ຜ່ານໃນຄັ້ງນີ້. ຂອບໃຈທີ່ເຂົ້າຮ່ວມ.";
   }
 }
+
+
