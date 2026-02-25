@@ -6,15 +6,18 @@ function doGet() {
 }
 
 function getBackgroundImageData() {
-  var folder = DriveApp.getFolderById("182XU72FN6FtWc9AmzHDfj3DAS6-kRwOn");
-  var files = folder.getFilesByName("form_background.png");
-  if (files.hasNext()) {
-    var file = files.next();
-    var blob = file.getBlob();
-    var base64 = Utilities.base64Encode(blob.getBytes());
-    return "data:" + blob.getContentType() + ";base64," + base64;
+  var folderId = '182XU72FN6FtWc9AmzHDfj3DAS6-kRwOn';
+  var fileName = 'form_background.png';
+  var folder = DriveApp.getFolderById(folderId);
+  var files = folder.getFilesByName(fileName);
+  if (!files.hasNext()) {
+    return '';
   }
-  return null;
+  var file = files.next();
+  var blob = file.getBlob();
+  var contentType = blob.getContentType();
+  var encoded = Utilities.base64Encode(blob.getBytes());
+  return 'data:' + contentType + ';base64,' + encoded;
 }
 
 function processSubmission(formObject) {
@@ -44,20 +47,21 @@ function processSubmission(formObject) {
 
 
 
-  var fileUrl = "ບໍ່ຮັບຮູບພາບ";
-  if (formObject.iqProofData) {
-    var match = formObject.iqProofData.match(/^data:(.+);base64,(.+)$/);
-    if (match) {
-      var contentType = match[1];
-      var bytes = Utilities.base64Decode(match[2]);
-      var fileName = formObject.iqProofName || "iq_proof";
-      var blob = Utilities.newBlob(bytes, contentType, fileName);
-      var folders = DriveApp.getFoldersByName("IQ Uploads");
-      var folder = folders.hasNext() ? folders.next() : DriveApp.createFolder("IQ Uploads");
-      var file = folder.createFile(blob);
-      file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-      fileUrl = file.getUrl();
-    }
+  var fileUrl = "ບໍ່ມີຮູບພາບ";
+  if (formObject.imageFileBase64 && formObject.imageFileName) {
+     var folder;
+     var folderIterator = DriveApp.getFoldersByName("Scholarship_IQ_Uploads");
+     if (folderIterator.hasNext()) {
+       folder = folderIterator.next();
+     } else {
+       folder = DriveApp.createFolder("Scholarship_IQ_Uploads"); // ສ້າງໂຟນເດີໃໝ່ຖ້າບໍ່ມີ
+     }
+     
+     var contentType = formObject.imageFileBase64.substring(5,formObject.imageFileBase64.indexOf(';'));
+     var bytes = Utilities.base64Decode(formObject.imageFileBase64.substr(formObject.imageFileBase64.indexOf('base64,')+7));
+     var blob = Utilities.newBlob(bytes, contentType, name + "_" + formObject.imageFileName);
+     var file = folder.createFile(blob);
+     fileUrl = file.getUrl();
   }
 
   // ກວດຄຳຕອບ Q8, Q9 ແລະ Q10
