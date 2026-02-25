@@ -96,14 +96,14 @@ function processSubmission(formObject) {
   if (q9Answer === "D. 14,000") { q9Points = 10; }
   if (q10Answer === "B. ບໍ່ໄດ້") { q10Points = 10; }
 
-  if (q11Answer === "B. ບໍ່ແມ່ນ") { q11Points = 1.25; }
-  if (q12Answer === "B. ບໍ່ແມ່ນ") { q12Points = 1.25; }
-  if (q13Answer === "B. ບໍ່ແມ່ນ") { q13Points = 1.25; }
-  if (q14Answer === "A. ແມ່ນແລ້ວ") { q14Points = 1.25; }
-  if (q15Answer === "B. ບໍ່ແມ່ນ") { q15Points = 1.25; }
-  if (q16Answer === "A. ແມ່ນແລ້ວ") { q16Points = 1.25; }
-  if (q17Answer === "B. ບໍ່ແມ່ນ") { q17Points = 1.25; }
-  if (q18Answer === "B. ບໍ່ແມ່ນ") { q18Points = 1.25; }
+  if (q11Answer === "B. ບໍ່ແມ່ນ") { q11Points = 0.625; }
+  if (q12Answer === "B. ບໍ່ແມ່ນ") { q12Points = 0.625; }
+  if (q13Answer === "B. ບໍ່ແມ່ນ") { q13Points = 0.625; }
+  if (q14Answer === "A. ແມ່ນແລ້ວ") { q14Points = 0.625; }
+  if (q15Answer === "B. ບໍ່ແມ່ນ") { q15Points = 0.625; }
+  if (q16Answer === "A. ແມ່ນແລ້ວ") { q16Points = 0.625; }
+  if (q17Answer === "B. ບໍ່ແມ່ນ") { q17Points = 0.625; }
+  if (q18Answer === "B. ບໍ່ແມ່ນ") { q18Points = 0.625; }
 
 
 
