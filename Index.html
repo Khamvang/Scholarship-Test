@@ -100,7 +100,7 @@
 
       <div class="section-title">I. ພາກຄິດໄລ່(ຂໍ້ລະ10ຄະແນນ)</div>
 
-      <div id="shuffledQuestions">
+      <div id="shuffledQuestions1">
         
         <div class="question-block shuffle-item">
           <label>Q8: 1. ປ່ອຍກູ້ 10,000 USD ຕໍ່ເດືອນ ອັດຕາ 2% (ດອກເບ້ຍທົ່ວໄປ) ເປັນເວລາ 6 ເດືອນ. ດອກເບ້ຍທັງໝົດ 6 ເດືອນແມ່ນເທົ່າໃດ?</label>
@@ -134,7 +134,7 @@
 
       <div class="section-title">II. ຈັນຍາບັນ (ໃນຕາຕະລາງຂໍ້ລະ1.25)(ແລະຍັງອີກ5ຂໍ້ແມ່ນຂໍ້ລະ2ຄະແນນ)</div>
 
-      <div id="shuffledQuestions">
+      <div id="shuffledQuestions2">
         
         <div class="question-block shuffle-item">
           <label>Q11: 1. ຂ້າພະເຈົ້າຄິດວ່າມັນບໍ່ເປັນບັນຫາທີ່ຈະເອົາອຸປະກອນຂະຫນາດນ້ອຍອອກຈາກຫ້ອງການ</label>
@@ -203,19 +203,25 @@
     <script>
       // ຟັງຊັນສະລັບຂໍ້ສອບ
       window.onload = function() {
-        var container = document.getElementById('shuffledQuestions');
-        var elementsArray = Array.prototype.slice.call(container.getElementsByClassName('shuffle-item'));
-        
-        elementsArray.forEach(function(element){ container.removeChild(element); });
-        
-        for (var i = elementsArray.length - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1));
-          var temp = elementsArray[i];
-          elementsArray[i] = elementsArray[j];
-          elementsArray[j] = temp;
+        function shuffleContainer(containerId) {
+          var container = document.getElementById(containerId);
+          if (!container) return;
+          var elementsArray = Array.prototype.slice.call(container.getElementsByClassName('shuffle-item'));
+          
+          elementsArray.forEach(function(element){ container.removeChild(element); });
+          
+          for (var i = elementsArray.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var temp = elementsArray[i];
+            elementsArray[i] = elementsArray[j];
+            elementsArray[j] = temp;
+          }
+
+          elementsArray.forEach(function(element){ container.appendChild(element); });
         }
 
-        elementsArray.forEach(function(element){ container.appendChild(element); });
+        shuffleContainer('shuffledQuestions1');
+        shuffleContainer('shuffledQuestions2');
 
         if (typeof google !== 'undefined' && google.script && google.script.run) {
           google.script.run
