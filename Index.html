@@ -28,13 +28,6 @@
      </div>
     
     <form id="testForm">
-      
-      <div class="question-block">
-        <label>ຮູບພາບພື້ນຫຼັງ (ທ່ານເລືອກເອງ)</label><br>
-        <small style="color: gray;">(ຮູບນີ້ໃຊ້ເພື່ອສະແດງໜ້າເວັບຂອງທ່ານ ບໍ່ຖືກອັບໂຫຼດອອນໄລນ໌)</small>
-        <input type="file" id="bgImage" accept="image/*" style="margin-top: 10px;">
-      </div>
-
       <div class="section-title">ຂໍ້ມູນສ່ວນຕົວ</div>
 
       <div class="question-block">
@@ -220,30 +213,6 @@
         }
 
         elementsArray.forEach(function(element){ container.appendChild(element); });
-
-        if (typeof google !== 'undefined' && google.script && google.script.run) {
-          google.script.run.withSuccessHandler(function(dataUrl) {
-            if (dataUrl) {
-              document.body.style.backgroundImage = "linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('" + dataUrl + "')";
-            }
-          }).getBackgroundImageData();
-        }
-
-        var bgInput = document.getElementById('bgImage');
-        if (bgInput) {
-          bgInput.addEventListener('change', function(event) {
-            var file = event.target.files[0];
-            if (file) {
-              var reader = new FileReader();
-              reader.onload = function(e) {
-                document.body.style.backgroundImage = "linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('" + e.target.result + "')";
-              };
-              reader.readAsDataURL(file);
-            } else {
-              document.body.style.backgroundImage = "";
-            }
-          });
-        }
       };
 
       // ຟັງຊັນຈັດການການສົ່ງຂໍ້ມູນແລະແປງຮູບພາບ
