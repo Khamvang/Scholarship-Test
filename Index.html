@@ -221,11 +221,16 @@
           google.script.run
             .withSuccessHandler(function(dataUrl) {
               if (dataUrl) {
-                document.body.style.background = 'linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(' + dataUrl + ')';
-                document.body.style.backgroundSize = 'cover';
                 var isMobile = window.matchMedia('(max-width: 768px)').matches;
-                document.body.style.backgroundAttachment = isMobile ? 'scroll' : 'fixed';
-                document.body.style.backgroundPosition = 'center';
+                if (!isMobile) {
+                  document.body.style.background = 'linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url(' + dataUrl + ')';
+                  document.body.style.backgroundSize = 'cover';
+                  document.body.style.backgroundAttachment = 'fixed';
+                  document.body.style.backgroundPosition = 'center';
+                } else {
+                  document.body.style.background = 'linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9))';
+                  document.body.style.backgroundAttachment = 'scroll';
+                }
               }
             })
             .getBackgroundImageData();
