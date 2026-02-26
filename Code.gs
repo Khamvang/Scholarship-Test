@@ -1,8 +1,8 @@
 function doGet() {
   return HtmlService.createHtmlOutputFromFile('Index')
-      .setTitle('ບົດສອບເສັງທຶນການສຶກສາ')
-      .setSandboxMode(HtmlService.SandboxMode.IFRAME)
-      .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+    .setTitle('ບົດສອບເສັງທຶນການສຶກສາ')
+    .setSandboxMode(HtmlService.SandboxMode.IFRAME)
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
 function getBackgroundImageData() {
@@ -37,7 +37,7 @@ function processSubmission(formObject) {
   // ດຶງຂໍ້ມູນ IQ ແລະ ຄິດໄລ່ຄະແນນ
   var iqChoice = formObject.iqScore;
   var iqPoints = 0;
-  
+
   if (iqChoice === "140+") { iqPoints = 60; }
   else if (iqChoice === "120–139") { iqPoints = 60; }
   else if (iqChoice === "110–119") { iqPoints = 55; }
@@ -50,19 +50,19 @@ function processSubmission(formObject) {
 
   var fileUrl = "ບໍ່ມີຮູບພາບ";
   if (formObject.imageFileBase64 && formObject.imageFileName) {
-     var folder;
-     var folderIterator = DriveApp.getFoldersByName("Scholarship_IQ_Uploads");
-     if (folderIterator.hasNext()) {
-       folder = folderIterator.next();
-     } else {
-       folder = DriveApp.createFolder("Scholarship_IQ_Uploads"); // ສ້າງໂຟນເດີໃໝ່ຖ້າບໍ່ມີ
-     }
-     
-     var contentType = formObject.imageFileBase64.substring(5,formObject.imageFileBase64.indexOf(';'));
-     var bytes = Utilities.base64Decode(formObject.imageFileBase64.substr(formObject.imageFileBase64.indexOf('base64,')+7));
-     var blob = Utilities.newBlob(bytes, contentType, name + "_" + formObject.imageFileName);
-     var file = folder.createFile(blob);
-     fileUrl = file.getUrl();
+    var folder;
+    var folderIterator = DriveApp.getFoldersByName("Scholarship_IQ_Uploads");
+    if (folderIterator.hasNext()) {
+      folder = folderIterator.next();
+    } else {
+      folder = DriveApp.createFolder("Scholarship_IQ_Uploads"); // ສ້າງໂຟນເດີໃໝ່ຖ້າບໍ່ມີ
+    }
+
+    var contentType = formObject.imageFileBase64.substring(5, formObject.imageFileBase64.indexOf(';'));
+    var bytes = Utilities.base64Decode(formObject.imageFileBase64.substr(formObject.imageFileBase64.indexOf('base64,') + 7));
+    var blob = Utilities.newBlob(bytes, contentType, name + "_" + formObject.imageFileName);
+    var file = folder.createFile(blob);
+    fileUrl = file.getUrl();
   }
 
   // ກວດຄຳຕອບ Q8, Q9 ແລະ Q10
@@ -103,7 +103,7 @@ function processSubmission(formObject) {
 
 
   // ⚠️ ກະລຸນາປ່ຽນຄຳຕອບທີ່ຖືກຕ້ອງ (ຕົວໜັງສືສີແດງ) ເປັນຄຳຕອບຕົວຈິງຂອງທ່ານ
-  if (q8Answer === "A. 1200") { q8Points = 10; } 
+  if (q8Answer === "A. 1200") { q8Points = 10; }
   if (q9Answer === "D. 14,000") { q9Points = 10; }
   if (q10Answer === "B. ບໍ່ໄດ້") { q10Points = 10; }
 
@@ -124,11 +124,11 @@ function processSubmission(formObject) {
 
 
   // ລວມຄະແນນ
-  var totalScore = iqPoints                                                                                         // 50 ຄະແນນ (ຖ້າໄດ້ IQ 100 ໄດ້ 50, IQ 110 ໄດ້ 55, IQ 120 ໄດ້ 60)
-                + (q8Points + q9Points + q10Points)                                                                 // 30 ຄະແນນ (ຂໍ້ລະ 10 ຄະແນນ)
-                + (q11Points + q12Points + q13Points + q14Points + q15Points + q16Points + q17Points + q18Points)   // 5 ຄະແນນ (ຂໍ້ລະ 0.625 ຄະແນນ)
-                + (q19Points + q20Points + q21Points + q22Points + q23Points)                                       // 5 ຄະແນນ (ຂໍ້ລະ 1 ຄະແນນ)
-                ;
+  var totalScore = iqPoints                                                                             // 50 ຄະແນນ (ຖ້າໄດ້ IQ 100 ໄດ້ 50, IQ 110 ໄດ້ 55, IQ 120 ໄດ້ 60)
+    + (q8Points + q9Points + q10Points)                                                                 // 30 ຄະແນນ (ຂໍ້ລະ 10 ຄະແນນ)
+    + (q11Points + q12Points + q13Points + q14Points + q15Points + q16Points + q17Points + q18Points)   // 5 ຄະແນນ (ຂໍ້ລະ 0.625 ຄະແນນ)
+    + (q19Points + q20Points + q21Points + q22Points + q23Points)                                       // 5 ຄະແນນ (ຂໍ້ລະ 1 ຄະແນນ)
+    ;
 
   var passThreshold = 100; // ຕັ້ງຄ່າຄະແນນຜ່ານຢູ່ບ່ອນນີ້
   var passed = totalScore >= passThreshold;
@@ -137,11 +137,11 @@ function processSubmission(formObject) {
 
 
   // ບັນທຶກລົງ Google Sheet
-  sheet.appendRow([new Date(), name, phone, gender, year, uni, iqChoice, iqPoints, fileUrl, 
-                  q8Answer, q8Points, q9Answer, q9Points, q10Answer, q10Points, 
-                  q11Answer, q11Points, q12Answer, q12Points, q13Answer, q13Points, q14Answer, q14Points, q15Answer, q15Points, q16Answer, q16Points, q17Answer, q17Points, q18Answer, q18Points,
-                  q19Answer, q19Points, q20Answer, q20Points, q21Answer, q21Points, q22Answer, q22Points, q23Answer, q23Points,
-                  totalScore, statusText]);
+  sheet.appendRow([new Date(), name, phone, gender, year, uni, iqChoice, iqPoints, fileUrl,
+    q8Answer, q8Points, q9Answer, q9Points, q10Answer, q10Points,
+    q11Answer, q11Points, q12Answer, q12Points, q13Answer, q13Points, q14Answer, q14Points, q15Answer, q15Points, q16Answer, q16Points, q17Answer, q17Points, q18Answer, q18Points,
+    q19Answer, q19Points, q20Answer, q20Points, q21Answer, q21Points, q22Answer, q22Points, q23Answer, q23Points,
+    totalScore, statusText]);
 
 
   // ສົ່ງຂໍ້ຄວາມກັບຄືນໄປຫາໜ້າຈໍນັກຮຽນ
