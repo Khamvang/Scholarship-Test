@@ -131,7 +131,7 @@ function processSubmission(formObject) {
 
 
   // ລວມຄະແນນ
-  var totalScore = iqPoints                                                                             // 50 ຄະແນນ (ຖ້າໄດ້ IQ 100 ໄດ້ 50, IQ 110 ໄດ້ 55, IQ 120 ໄດ້ 60)
+  var totalScore = iqPoints                                                                             // 60 ຄະແນນ (ຖ້າໄດ້ IQ 100 ໄດ້ 50, IQ 110 ໄດ້ 55, IQ 120 ໄດ້ 60)
     + (q8Points + q9Points + q10Points)                                                                 // 30 ຄະແນນ (ຂໍ້ລະ 10 ຄະແນນ)
     + (q11Points + q12Points + q13Points + q14Points + q15Points + q16Points + q17Points + q18Points)   // 5 ຄະແນນ (ຂໍ້ລະ 0.625 ຄະແນນ)
     + (q19Points + q20Points + q21Points + q22Points + q23Points)                                       // 5 ຄະແນນ (ຂໍ້ລະ 1 ຄະແນນ)
