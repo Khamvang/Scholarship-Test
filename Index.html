@@ -49,6 +49,7 @@
 
     input[type="text"],
     input[type="file"],
+    input[type="tel"],
     select {
       width: 100%;
       padding: 10px;
@@ -56,6 +57,13 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    .phone-row input[type="tel"] {
+      flex: 1;
+      min-width: 220px;
+      padding: 12px;
       font-size: 16px;
     }
 
@@ -153,7 +161,7 @@
           <select name="countryCode" aria-label="ລະຫັດປະເທດ" required class="country-select">
             <option value="+856">🇱🇦 +856</option>
           </select>
-          <input type="tel" name="phoneLocal" aria-label="ເບີໂທລະສັບລາວ" required pattern="^(?:20\d{8}|30\d{7})$" inputmode="tel" oninput="this.value=this.value.replace(/\D+/g,'');" placeholder="2029301330/305556666" title="ກະລຸນາປ້ອນເບີລາວເລີ່ມຕົ້ນ 20 ຫຼື 30 ຕາມດ້ວຍ 7-8 ຕົວເລກ">
+          <input type="tel" name="phoneLocal" aria-label="ເບີໂທລະສັບລາວ" required pattern="^(?:20\d{8}|30\d{7})$" inputmode="tel" oninput="this.value=this.value.replace(/\D+/g,'');" placeholder="2022223333 ຫຼື 305556666" title="ກະລຸນາປ້ອນເບີລາວເລີ່ມຕົ້ນ 20 ຫຼື 30 ຕາມດ້ວຍ 7 ຕົວເລກ">
         </div>
     </div>
 
@@ -540,6 +548,6 @@
   </script>
 </body>
 
-</html>
+
 
 
