@@ -14,6 +14,8 @@
       input[type="radio"] { margin-right: 8px; }
       label { font-weight: bold; color: #444;}
       .radio-option { margin-top: 8px; display: block;}
+      .phone-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+      .country-select { width: 130px; }
       button { padding: 12px 25px; background-color: #0056b3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 20px;}
       button:disabled { background-color: #cccccc; }
       #resultMessage { margin-top: 20px; font-size: 1.3em; font-weight: bold; display: none; padding: 20px; border-radius: 5px; text-align: center;}
@@ -43,7 +45,12 @@
 
       <div class="question-block">
         <label>Q2: ເບີໂທລະສັບ</label>
-        <input type="tel" name="phone" required pattern="^\+?\d{7,15}$" inputmode="tel" title="ກະລຸນາປ້ອນເບີໂທລະສັບ 7-15 ຕົວເລກ (ສາມາດມີ + ນໍາໜ້າ)">
+        <div class="phone-row">
+          <select name="countryCode" aria-label="ລະຫັດປະເທດ" required class="country-select">
+            <option value="+856">🇱🇦 +856</option>
+          </select>
+          <input type="tel" name="phoneLocal" aria-label="ເບີໂທລະສັບລາວ" required pattern="^(?:20\\d{8}|30\\d{7,8})$" inputmode="tel" oninput="this.value=this.value.replace(/\\s+/g,'');" placeholder="2029301330/305556666" title="ກະລຸນາປ້ອນເບີລາວເລີ່ມຕົ້ນ 20 ຫຼື 30 ຕາມດ້ວຍ 7-8 ຕົວເລກ">
+        </div>
       </div>
 
       <div class="question-block">
@@ -328,9 +335,13 @@
         var file = fileInput.files[0];
 
         var buildAndSend = function(fileDataUrl) {
+          var countryCode = form.countryCode.value || "";
+          var normalizedLocal = form.phoneLocal.value.replace(/\s+/g, '');
+          var fullPhone = countryCode + normalizedLocal;
+
           var formObject = {
             studentName: form.studentName.value,
-            phone: form.phone.value,
+            phone: fullPhone,
             gender: form.gender.value,
             year: form.year.value,
             university: form.university.value,
