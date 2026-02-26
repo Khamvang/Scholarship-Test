@@ -81,8 +81,16 @@
       display: block;
     }
 
-    .phone-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .country-select { width: 130px; }
+    .phone-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .country-select {
+      width: 130px;
+    }
 
     button {
       padding: 12px 25px;
@@ -157,12 +165,12 @@
 
     <div class="question-block">
       <label>Q2: ເບີໂທລະສັບ</label>
-        <div class="phone-row">
-          <select name="countryCode" aria-label="ລະຫັດປະເທດ" required class="country-select">
+      <div class="phone-row">
+        <select name="countryCode" aria-label="ລະຫັດປະເທດ" required class="country-select">
             <option value="+856">🇱🇦 +856</option>
           </select>
-          <input type="tel" name="phoneLocal" aria-label="ເບີໂທລະສັບລາວ" required pattern="^(?:20\d{8}|30\d{7})$" inputmode="tel" oninput="this.value=this.value.replace(/\D+/g,'');" placeholder="2022223333 ຫຼື 305556666" title="ກະລຸນາປ້ອນເບີລາວເລີ່ມຕົ້ນ 20 ຫຼື 30 ຕາມດ້ວຍ 7 ຕົວເລກ">
-        </div>
+        <input type="tel" name="phoneLocal" aria-label="ເບີໂທລະສັບລາວ" required pattern="^(?:20\d{8}|30\d{7})$" inputmode="tel" oninput="this.value=this.value.replace(/\D+/g,'');" placeholder="2022223333 ຫຼື 305556666" title="ກະລຸນາປ້ອນເບີລາວເລີ່ມຕົ້ນ 20 ຫຼື 30 ຕາມດ້ວຍ 7 ຕົວເລກ">
+      </div>
     </div>
 
     <div class="question-block">
@@ -382,6 +390,32 @@
       </div>
 
 
+      <div class="question-block shuffle-item">
+        <label>Q24: 1. ທ່າຄິດວ່າວິທີການຕໍ່ໄປນີ້ ວິທີການໃດ ທີ່ສາມາດຊອກຫາລູກຄ້າໄດ້ດີທີ່ສຸດ?</label>
+        <div class="radio-option"><input type="radio" name="q24" value="A. ການນຳໃຊ້ການໂຄສະນາອອນລາຍ" required> A. ການນຳໃຊ້ການໂຄສະນາອອນລາຍ
+        </div>
+        <div class="radio-option"><input type="radio" name="q24" value="B. ການແນະນຳລູກຄ້າຈາກຄົນຮູ້ຈັກ"> B. ການແນະນຳລູກຄ້າຈາກຄົນຮູ້ຈັກ
+        </div>
+        <div class="radio-option"><input type="radio" name="q24" value="C. ການລົງໂຄສະນາຕະຫຼາດແຈກຢາຍໃຍປິວ"> C. ການລົງໂຄສະນາຕະຫຼາດແຈກຢາຍໃຍປິວ
+        </div>
+        <div class="radio-option"><input type="radio" name="q24" value="D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ສົນໃຈ"> D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ສົນໃຈ
+        </div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+      </div>
+
+
+      <div class="question-block shuffle-item">
+        <label>Q25: 2. ທ່ານຄິດວ່າສາຍພົວພັນທາງໃດທີ່ຈະສາມາດແນະນຳລູກຄ້າໃຫ້ຕົນເອງໄດ້ດີທີ່່ສຸດ?</label>
+        <div class="radio-option"><input type="radio" name="q25" value="A. ສາຍພົວພັນທາງສາຍເລືອດ" required> A. ສາຍພົວພັນທາງສາຍເລືອດ
+        </div>
+        <div class="radio-option"><input type="radio" name="q25" value="B. ສາຍພົວພັນຄົນອາໄສຢູ່ບ້ານດຽວກັນ"> B. ສາຍພົວພັນຄົນອາໄສຢູ່ບ້ານດຽວກັນ
+        </div>
+        <div class="radio-option"><input type="radio" name="q25" value="C. ສາຍພົວພັນໝູ່ທີ່ເຄີຍຮຽນນຳກັນ"> C. ສາຍພົວພັນໝູ່ທີ່ເຄີຍຮຽນນຳກັນ
+        </div>
+        <div class="radio-option"><input type="radio" name="q25" value="D. ສານພົວພັນໝູ່ທີ່ເຮັດວຽກບໍລິສັດຄູ່ແຂ່ງ"> D. ສານພົວພັນໝູ່ທີ່ເຮັດວຽກບໍລິສັດຄູ່ແຂ່ງ
+        </div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+      </div>
+
+
     </div>
 
 
@@ -501,6 +535,8 @@
             q21: form.querySelector('input[name="q21"]:checked').value,
             q22: form.querySelector('input[name="q22"]:checked').value,
             q23: form.querySelector('input[name="q23"]:checked').value,
+            q24: form.querySelector('input[name="q24"]:checked').value,
+            q25: form.querySelector('input[name="q25"]:checked').value,
           };
 
           sendToBackend(formObject);
@@ -547,7 +583,5 @@
       }
   </script>
 </body>
-
-
 
 
