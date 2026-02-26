@@ -82,6 +82,8 @@ function processSubmission(formObject) {
   var q21Answer = formObject.q21;
   var q22Answer = formObject.q22;
   var q23Answer = formObject.q23;
+  var q24Answer = formObject.q24;
+  var q25Answer = formObject.q25;
 
   var q8Points = 0;
   var q9Points = 0;
@@ -99,11 +101,13 @@ function processSubmission(formObject) {
   var q21Points = 0;
   var q22Points = 0;
   var q23Points = 0;
+  var q24Points = 0;
+  var q25Points = 0;
 
 
 
   // ⚠️ ກະລຸນາປ່ຽນຄຳຕອບທີ່ຖືກຕ້ອງ (ຕົວໜັງສືສີແດງ) ເປັນຄຳຕອບຕົວຈິງຂອງທ່ານ
-  if (q8Answer === "A. 1200") { q8Points = 10; }
+  if (q8Answer === "A. 1,200") { q8Points = 10; }
   if (q9Answer === "D. 14,000") { q9Points = 10; }
   if (q10Answer === "B. ບໍ່ໄດ້") { q10Points = 10; }
 
@@ -122,12 +126,16 @@ function processSubmission(formObject) {
   if (q22Answer === "A. ກວດເບິ່ງກົດລະບຽບ ແລະ ຖາມຄໍາຖາມຕໍ່ກັບ ຫົວໜ້າຂອງທ່ານ") { q22Points = 1; }
   if (q23Answer === "B. ຂໍໂທດກັບຫມູ່ເພື່ອນແລະປະຕິເສດ") { q23Points = 1; }
 
+  if (q24Answer === "D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ສົນໃຈ") { q24Points = 5; }
+  if (q25Answer === "D. ສານພົວພັນໝູ່ທີ່ເຮັດວຽກບໍລິສັດຄູ່ແຂ່ງ") { q25Points = 5; }
+
 
   // ລວມຄະແນນ
   var totalScore = iqPoints                                                                             // 50 ຄະແນນ (ຖ້າໄດ້ IQ 100 ໄດ້ 50, IQ 110 ໄດ້ 55, IQ 120 ໄດ້ 60)
     + (q8Points + q9Points + q10Points)                                                                 // 30 ຄະແນນ (ຂໍ້ລະ 10 ຄະແນນ)
     + (q11Points + q12Points + q13Points + q14Points + q15Points + q16Points + q17Points + q18Points)   // 5 ຄະແນນ (ຂໍ້ລະ 0.625 ຄະແນນ)
     + (q19Points + q20Points + q21Points + q22Points + q23Points)                                       // 5 ຄະແນນ (ຂໍ້ລະ 1 ຄະແນນ)
+    + (q24Points + q25Points)                                                                           // 10 ຄະແນນ (ຂໍ້ລະ 5 ຄະແນນ)
     ;
 
   var passThreshold = 100; // ຕັ້ງຄ່າຄະແນນຜ່ານຢູ່ບ່ອນນີ້
@@ -141,6 +149,7 @@ function processSubmission(formObject) {
     q8Answer, q8Points, q9Answer, q9Points, q10Answer, q10Points,
     q11Answer, q11Points, q12Answer, q12Points, q13Answer, q13Points, q14Answer, q14Points, q15Answer, q15Points, q16Answer, q16Points, q17Answer, q17Points, q18Answer, q18Points,
     q19Answer, q19Points, q20Answer, q20Points, q21Answer, q21Points, q22Answer, q22Points, q23Answer, q23Points,
+    q24Answer, q24Points, q25Answer, q25Points,
     totalScore, statusText]);
 
 
