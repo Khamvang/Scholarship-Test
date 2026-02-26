@@ -1,60 +1,171 @@
 <!DOCTYPE html>
 <html lang="lo">
-  <head>
-    <base target="_top">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
-    <style>
-      body { font-family: "Phetsarath OT", Arial, sans-serif; padding: 20px; max-width: 650px; width: 100%; box-sizing: border-box; margin: auto; min-height: 100vh; background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)); background-size: cover; background-attachment: scroll; background-position: center top; background-repeat: no-repeat;}
-      .header { text-align: center; margin-bottom: 30px; }
-      .header p { color: #0056b3; margin-top: 8px; }
-      .section-title { font-size: 1.2em; color: #333; border-bottom: 2px solid #0056b3; padding-bottom: 5px; margin-top: 30px;}
-      .question-block { background: white; margin-bottom: 15px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
-      input[type="text"], input[type="file"], select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 16px;}
-      input[type="radio"] { margin-right: 8px; }
-      label { font-weight: bold; color: #444;}
-      .radio-option { margin-top: 8px; display: block;}
-      button { padding: 12px 25px; background-color: #0056b3; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; margin-top: 20px;}
-      button:disabled { background-color: #cccccc; }
-      #resultMessage { margin-top: 20px; font-size: 1.3em; font-weight: bold; display: none; padding: 20px; border-radius: 5px; text-align: center;}
-      .pass { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;}
-      .fail { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;}
-      @media (max-width: 768px) {
-        body { padding: 14px; max-width: 100%; background-attachment: scroll; }
-        .question-block { padding: 12px; }
-        .section-title { font-size: 1.1em; }
+
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes">
+  <style>
+    body {
+      font-family: "Phetsarath OT", Arial, sans-serif;
+      padding: 20px;
+      max-width: 650px;
+      width: 100%;
+      box-sizing: border-box;
+      margin: auto;
+      min-height: 100vh;
+      background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+      background-size: cover;
+      background-attachment: scroll;
+      background-position: center top;
+      background-repeat: no-repeat;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .header p {
+      color: #0056b3;
+      margin-top: 8px;
+    }
+
+    .section-title {
+      font-size: 1.2em;
+      color: #333;
+      border-bottom: 2px solid #0056b3;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+
+    .question-block {
+      background: white;
+      margin-bottom: 15px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    input[type="radio"] {
+      margin-right: 8px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #444;
+    }
+
+    .radio-option {
+      margin-top: 8px;
+      display: block;
+    }
+
+    .phone-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .country-select { width: 130px; }
+
+    button {
+      padding: 12px 25px;
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    button:disabled {
+      background-color: #cccccc;
+    }
+
+    #resultMessage {
+      margin-top: 20px;
+      font-size: 1.3em;
+      font-weight: bold;
+      display: none;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .pass {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .fail {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 14px;
+        max-width: 100%;
+        background-attachment: scroll;
       }
-    </style>
-  </head>
-  <body>
 
-     <div class="header">
-       <h2>ບົດສອບເສັງທຶນການສຶກສາ</h2>
-       <p>ການສອບເສັງເພື່ອຄັດເລືອກຜູ້ຮັບທຶນ ແລະ ປະກາດຜົນຜ່ານລະບົບອອນໄລນ໌</p>
-     </div>
-    
-    <form id="testForm">
-      <div class="section-title">ຂໍ້ມູນສ່ວນຕົວ</div>
+      .question-block {
+        padding: 12px;
+      }
 
-      <div class="question-block">
-        <label>Q1: ຊື່ ແລະ ນາມສະກຸນ</label>
-        <input type="text" name="studentName" required>
-      </div>
+      .section-title {
+        font-size: 1.1em;
+      }
+    }
+  </style>
+</head>
 
-      <div class="question-block">
-        <label>Q2: ເບີໂທລະສັບ</label>
-        <input type="text" name="phone" required>
-      </div>
+<body>
 
-      <div class="question-block">
-        <label>Q3: ເພດ</label>
-        <div class="radio-option"><input type="radio" name="gender" value="ຊາຍ" required> ຊາຍ</div>
-        <div class="radio-option"><input type="radio" name="gender" value="ຍິງ"> ຍິງ</div>
-      </div>
+  <div class="header">
+    <h2>ບົດສອບເສັງທຶນການສຶກສາ</h2>
+    <p>ການສອບເສັງເພື່ອຄັດເລືອກຜູ້ຮັບທຶນ ແລະ ປະກາດຜົນຜ່ານລະບົບອອນໄລນ໌</p>
+  </div>
 
-      <div class="question-block">
-        <label>Q4: ນັກສຶກສາປີທີ</label>
-        <select name="year" required>
+  <form id="testForm">
+    <div class="section-title">ຂໍ້ມູນສ່ວນຕົວ</div>
+
+    <div class="question-block">
+      <label>Q1: ຊື່ ແລະ ນາມສະກຸນ</label>
+      <input type="text" name="studentName" required>
+    </div>
+
+    <div class="question-block">
+      <label>Q2: ເບີໂທລະສັບ</label>
+        <div class="phone-row">
+          <select name="countryCode" aria-label="ລະຫັດປະເທດ" required class="country-select">
+            <option value="+856">🇱🇦 +856</option>
+          </select>
+          <input type="tel" name="phoneLocal" aria-label="ເບີໂທລະສັບລາວ" required pattern="^(?:20\d{8}|30\d{7})$" inputmode="tel" oninput="this.value=this.value.replace(/\D+/g,'');" placeholder="2029301330/305556666" title="ກະລຸນາປ້ອນເບີລາວເລີ່ມຕົ້ນ 20 ຫຼື 30 ຕາມດ້ວຍ 7-8 ຕົວເລກ">
+        </div>
+    </div>
+
+    <div class="question-block">
+      <label>Q3: ເພດ</label>
+      <div class="radio-option"><input type="radio" name="gender" value="ຊາຍ" required> ຊາຍ</div>
+      <div class="radio-option"><input type="radio" name="gender" value="ຍິງ"> ຍິງ</div>
+    </div>
+
+    <div class="question-block">
+      <label>Q4: ນັກສຶກສາປີທີ</label>
+      <select name="year" required>
           <option value="" disabled selected>ເລືອກປີຮຽນ</option>
           <option value="ປີ1">ປີ1</option>
           <option value="ປີ2">ປີ2</option>
@@ -62,11 +173,11 @@
           <option value="ປີ4">ປີ4</option>
           <option value="ປີ5">ປີ5</option>
         </select>
-      </div>
+    </div>
 
-      <div class="question-block">
-        <label>Q5: ນັກສຶກສາຈາກມະຫາວິທະຍາໄລ</label>
-        <select name="university" required>
+    <div class="question-block">
+      <label>Q5: ນັກສຶກສາຈາກມະຫາວິທະຍາໄລ</label>
+      <select name="university" required>
           <option value="" disabled selected>ເລືອກສະຖາບັນ</option>
           <option value="ມະຫາວິທະຍາໄລແຫ່ງຊາດລາວ">ມະຫາວິທະຍາໄລແຫ່ງຊາດລາວ</option>
           <option value="ສະຖາບັນການທະນາຄານ">ສະຖາບັນການທະນາຄານ</option>
@@ -76,13 +187,14 @@
           <option value="ມະຫາວິທະຍາໄລສະຫວັນນະເຂດ">ມະຫາວິທະຍາໄລສະຫວັນນະເຂດ</option>
           <option value="ມະຫາວິທະຍາໄລຈຳປາສັກ">ມະຫາວິທະຍາໄລຈຳປາສັກ</option>
         </select>
-      </div>
+    </div>
 
-      <div class="section-title">ການທົດສອບ IQ <a href="https://www.arealme.com/iq-2021/th/" target="_blank" rel="noopener noreferrer">ກົດເຂົ້າລີ້ງນີ້</a></div>
+    <div class="section-title">ການທົດສອບ IQ <a href="https://www.arealme.com/iq-2021/th/" target="_blank"
+        rel="noopener noreferrer">ກົດເຂົ້າລີ້ງນີ້</a></div>
 
-      <div class="question-block">
-        <label>Q6: ຄະແນນເສັງ IQ</label>
-        <select name="iqScore" required>
+    <div class="question-block">
+      <label>Q6: ຄະແນນເສັງ IQ</label>
+      <select name="iqScore" required>
           <option value="" disabled selected>ເລືອກຊ່ວງຄະແນນຂອງທ່ານ</option>
           <option value="140+"> 140 ຂື້ນໄປ</option>
           <option value="120–139"> ລະຫວ່າງ 120–139</option>
@@ -92,162 +204,186 @@
           <option value="60–79"> ລະຫວ່າງ 60–79</option>
           <option value="ຕ່ຳກວ່າ 60"> ຕ່ຳກວ່າ 60</option>
         </select>
+    </div>
+
+    <div class="question-block">
+      <label>Q7: ອັບໂຫຼດພາບຜົນເສັງ IQ (PNG/JPG)</label>
+      <input type="file" id="iqProof" name="iqProof" accept="image/*" required>
+    </div>
+
+    <div class="section-title">I. ພາກຄິດໄລ່(ຂໍ້ລະ10ຄະແນນ)</div>
+
+    <div id="shuffledQuestions1">
+
+      <div class="question-block shuffle-item">
+        <label>Q8: 1. ປ່ອຍກູ້ 10,000 USD ຕໍ່ເດືອນ ອັດຕາ 2% (ດອກເບ້ຍທົ່ວໄປ) ເປັນເວລາ 6 ເດືອນ. ດອກເບ້ຍທັງໝົດ 6 ເດືອນແມ່ນເທົ່າໃດ?</label>
+        <div class="radio-option"><input type="radio" name="q8" value="A. 1,200" required> A. 1,200</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+        <div class="radio-option"><input type="radio" name="q8" value="B. 2,000"> B. 2,000</div>
+        <div class="radio-option"><input type="radio" name="q8" value="C. 2,500"> C. 2,500</div>
+        <div class="radio-option"><input type="radio" name="q8" value="D. 3,000"> D. 3,000</div>
       </div>
 
-      <div class="question-block">
-        <label>Q7: ອັບໂຫຼດພາບຜົນເສັງ IQ (PNG/JPG)</label>
-        <input type="file" id="iqProof" name="iqProof" accept="image/*" required>
+
+      <div class="question-block shuffle-item">
+        <label>Q9: 2. ພວກເຮົາຈະປ່ອຍເງິນກູ້ໃຫ້ທ່ານ 24,000 USD ເປັນເວລາ 12 ເດືອນ. ນອກຈາກດອກເບັ້ຍແລ້ວ. ຈຳນວນເງິນທີ່ຕ້ອງຊຳ(ຕົ້ນທຶນ)ແມ່ນເທົ່າ ກັນທຸກໆເດືອນ ເພື່ອໃຫ້ ຈໍານວນເງິນຕົ້ນທຶນຈະເປັນສູນຫຼັງຈາກ 12 ເດືອນ. ເງິນຕົ້ນເຫຼືອເທົ່າໃດຫຼັງຈາກ 5 ເດືອນ?</label>
+        <div class="radio-option"><input type="radio" name="q9" value="A. 20,000" required> A. 20,000</div>
+        <div class="radio-option"><input type="radio" name="q9" value="B. 18,000"> B. 18,000</div>
+        <div class="radio-option"><input type="radio" name="q9" value="C. 16,000"> C. 16,000</div>
+        <div class="radio-option"><input type="radio" name="q9" value="D. 14,000"> D. 14,000</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
       </div>
 
-      <div class="section-title">I. ພາກຄິດໄລ່(ຂໍ້ລະ10ຄະແນນ)</div>
 
-      <div id="shuffledQuestions1">
-        
-        <div class="question-block shuffle-item">
-          <label>Q8: 1. ປ່ອຍກູ້ 10,000 USD ຕໍ່ເດືອນ ອັດຕາ 2% (ດອກເບ້ຍທົ່ວໄປ) ເປັນເວລາ 6 ເດືອນ. ດອກເບ້ຍທັງໝົດ 6 ເດືອນແມ່ນເທົ່າໃດ?</label>
-          <div class="radio-option"><input type="radio" name="q8" value="A. 1,200" required> A. 1,200</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-          <div class="radio-option"><input type="radio" name="q8" value="B. 2,000"> B. 2,000</div>
-          <div class="radio-option"><input type="radio" name="q8" value="C. 2,500"> C. 2,500</div>
-          <div class="radio-option"><input type="radio" name="q8" value="D. 3,000"> D. 3,000</div>
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q9: 2. ພວກເຮົາຈະປ່ອຍເງິນກູ້ໃຫ້ທ່ານ 24,000 USD ເປັນເວລາ 12 ເດືອນ. ນອກຈາກດອກເບັ້ຍແລ້ວ. ຈຳນວນເງິນທີ່ຕ້ອງຊຳ(ຕົ້ນທຶນ)ແມ່ນເທົ່າ ກັນທຸກໆເດືອນ ເພື່ອໃຫ້ ຈໍານວນເງິນຕົ້ນທຶນຈະເປັນສູນຫຼັງຈາກ 12 ເດືອນ. ເງິນຕົ້ນເຫຼືອເທົ່າໃດຫຼັງຈາກ 5 ເດືອນ?</label>
-          <div class="radio-option"><input type="radio" name="q9" value="A. 20,000" required> A. 20,000</div>
-          <div class="radio-option"><input type="radio" name="q9" value="B. 18,000"> B. 18,000</div>
-          <div class="radio-option"><input type="radio" name="q9" value="C. 16,000"> C. 16,000</div>
-          <div class="radio-option"><input type="radio" name="q9" value="D. 14,000"> D. 14,000</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q10: 3. ພວກເຮົາ ໃຫ້ກູ້ຢືມ ແກ່ ລູກຄ້າ, ໂດຍໃຊ້ລົດ ເປັນຫຼັກຊັບຄ້ຳປະກັນ ພວກເຮົາປະເມີນມູນຄ່າລົດໄດ້ 20,000 USD ແຕ່ລູກຄ້າຕ້ອງການກູ້ຢືມ 50,000 USD. 
+      <div class="question-block shuffle-item">
+        <label>Q10: 3. ພວກເຮົາ ໃຫ້ກູ້ຢືມ ແກ່ ລູກຄ້າ, ໂດຍໃຊ້ລົດ ເປັນຫຼັກຊັບຄ້ຳປະກັນ ພວກເຮົາປະເມີນມູນຄ່າລົດໄດ້ 20,000 USD ແຕ່ລູກຄ້າຕ້ອງການກູ້ຢືມ 50,000 USD. 
             ພວກເຮົາສາມາດຍອມໃຫ້ສິນເຊື່ອ 50,000 USD ໄດ້ບໍ? </label>
-          <div class="radio-option"><input type="radio" name="q10" value="A. ໄດ້" required> A. ໄດ້</div>
-          <div class="radio-option"><input type="radio" name="q10" value="B. ບໍ່ໄດ້"> B. ບໍ່ໄດ້</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-        </div>
-        
+        <div class="radio-option"><input type="radio" name="q10" value="A. ໄດ້" required> A. ໄດ້</div>
+        <div class="radio-option"><input type="radio" name="q10" value="B. ບໍ່ໄດ້"> B. ບໍ່ໄດ້</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+      </div>
+
+    </div>
+
+
+
+
+    <div class="section-title">II. ຈັນຍາບັນ (ຄຳຖາມທີ່11 ຫາ ຄຳຖາມທີ່18 ຂໍ້ລະ 0.625ຄະແນນ)(ແລະ ຄຳຖາມທີ່19 ຫາ ຄຳຖາມທີ່23
+      ຂໍ້ລະ 1ຄະແນນ)</div>
+
+    <div id="shuffledQuestions2">
+
+      <div class="question-block shuffle-item">
+        <label>Q11: 1. ຂ້າພະເຈົ້າຄິດວ່າມັນບໍ່ເປັນບັນຫາທີ່ຈະເອົາອຸປະກອນຂະຫນາດນ້ອຍອອກຈາກຫ້ອງການ</label>
+        <div class="radio-option"><input type="radio" name="q11" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+        <div class="radio-option"><input type="radio" name="q11" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
       </div>
 
 
-
-
-      <div class="section-title">II. ຈັນຍາບັນ (ຄຳຖາມທີ່11 ຫາ ຄຳຖາມທີ່18 ຂໍ້ລະ 0.625ຄະແນນ)(ແລະ ຄຳຖາມທີ່19 ຫາ ຄຳຖາມທີ່23 ຂໍ້ລະ 1ຄະແນນ)</div>
-
-      <div id="shuffledQuestions2">
-        
-        <div class="question-block shuffle-item">
-          <label>Q11: 1. ຂ້າພະເຈົ້າຄິດວ່າມັນບໍ່ເປັນບັນຫາທີ່ຈະເອົາອຸປະກອນຂະຫນາດນ້ອຍອອກຈາກຫ້ອງການ</label>
-          <div class="radio-option"><input type="radio" name="q11" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
-          <div class="radio-option"><input type="radio" name="q11" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q12: 2. ຜົນໄດ້ຮັບແມ່ນສໍາຄັນກວ່າກົດລະບຽບ</label>
-          <div class="radio-option"><input type="radio" name="q12" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
-          <div class="radio-option"><input type="radio" name="q12" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q13: 3. ຖ້າບໍ່ມີໃຜເບິ່ງເຈົ້າ, ເຈົ້າສາມາດບໍ່ເຮັດຕາມກົດລະບຽບໄດ້</label>
-          <div class="radio-option"><input type="radio" name="q13" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
-          <div class="radio-option"><input type="radio" name="q13" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q14: 4. ທຸກຄັ້ງທີ່ເຈົ້າຖືກສັ່ງໃຫ້ໂກງ, ເຈົ້າຈະປະຕິເສດ</label>
-          <div class="radio-option"><input type="radio" name="q14" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-          <div class="radio-option"><input type="radio" name="q14" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q15: 5. ມັນບໍ່ເປັນຫຍັງທີ່ຈະເອົາທຸລະກິດຄອບຄົວຂອງເຈົ້າມາເຮັດຢູ່ບ່ອນເຮັດວຽກ</label>
-          <div class="radio-option"><input type="radio" name="q15" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
-          <div class="radio-option"><input type="radio" name="q15" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q16: 6. ຢ່າເອົາຂໍ້ມູນຂອງລູກຄ້າເມື່ອທ່ານລາອອກຈາກບໍລິສັດ</label>
-          <div class="radio-option"><input type="radio" name="q16" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-          <div class="radio-option"><input type="radio" name="q16" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q17: 7. ຂໍໃຫ້ເພື່ອນຮ່ວມງານກົດບັດເຂົ້າວຽກແທນເພື່ອປິດບັງການມາວຽກຊ້າຂອງເຈົ້າ ມັນເປັນທີ່ຍອມຮັບໄດ້</label>
-          <div class="radio-option"><input type="radio" name="q17" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
-          <div class="radio-option"><input type="radio" name="q17" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q18: 8. ບາງຄັ້ງມັນສະຫລາດກວ່າທີ່ຈະປິດບັງຄວາມລົ້ມເຫລວດີກ່ວາທີ່ການລາຍງານມັນກັບຫົວໜ້າຂອງເຈົ້າ</label>
-          <div class="radio-option"><input type="radio" name="q18" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
-          <div class="radio-option"><input type="radio" name="q18" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q19: 1. ຂ້າພະເຈົ້າໄດ້ເຫັນເພື່ອນຮ່ວມງານປອມແປງບັນທຶກການຊຳລະຄ່າງວດຂອງລູກຄ້າ</label>
-          <div class="radio-option"><input type="radio" name="q19" value="A. ເຮັດຄືວ່າທ່ານບໍ່ໄດ້ເຫັນ" required> A. ເຮັດຄືວ່າທ່ານບໍ່ໄດ້ເຫັນ</div>
-          <div class="radio-option"><input type="radio" name="q19" value="B. ຊ່ວຍເຫຼືອເພື່ອນຮ່ວມງານຂອງທ່ານ"> B. ຊ່ວຍເຫຼືອເພື່ອນຮ່ວມງານຂອງທ່ານ</div>
-          <div class="radio-option"><input type="radio" name="q19" value="C. ທັນທີທັນໃດລາຍງານກັບຫົວຫນ້າຫຼືພະແນກກວດສອບ"> C. ທັນທີທັນໃດລາຍງານກັບຫົວຫນ້າຫຼືພະແນກກວດສອບ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-          <div class="radio-option"><input type="radio" name="q19" value="D. ສັງເກດບິ່ງຫຼັງຈາກການພັກຜ່ອນ"> D. ສັງເກດບິ່ງຫຼັງຈາກການພັກຜ່ອນ</div>
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q20: 2. ລູກຄ້າໃນລະຫວ່າງຂະບວນການກວດສອບແຕ່ ເອົາຂອງຂວັນລາຄາແພງ ແລະ ຂໍໃຫ້ຜ່ານ</label>
-          <div class="radio-option"><input type="radio" name="q20" value="A. ຮັບເອົາຂອງຂວັນ" required> A. ຮັບເອົາຂອງຂວັນ</div>
-          <div class="radio-option"><input type="radio" name="q20" value="B. ບັນທຶກແລະລາຍງານໂດຍບໍ່ມີການໄດ້ຮັບ"> B. ບັນທຶກແລະລາຍງານໂດຍບໍ່ມີການໄດ້ຮັບ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-          <div class="radio-option"><input type="radio" name="q20" value="C. ສົ່ງຄືນຈະນວນເລັກນ້ອຍ"> C. ສົ່ງຄືນຈະນວນເລັກນ້ອຍ</div>
-          <div class="radio-option"><input type="radio" name="q20" value="D. ຮັບ ໂດຍມີເງື່ອນໄຂ ການອະນຸໂລມ"> D. ຮັບ ໂດຍມີເງື່ອນໄຂ ການອະນຸໂລມ</div>
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q21: 3. ລູກຄ້າ ຂໍສຳເນົາຕາຕະລາງການຊໍາຄ່າງສດ 1 ສະບັບ, ແຕ່ຜູ້ຮັບຜິດຊອບປະຕິເສດເພາະວ່າ ພວກເຂົາຍັງຄາວຽກ</label>
-          <div class="radio-option"><input type="radio" name="q21" value="A. ເລື່ອນ" required> A. ເລື່ອນ</div>
-          <div class="radio-option"><input type="radio" name="q21" value="B. ໄລ່ຄ່າທໍານຽມ"> B. ໄລ່ຄ່າທໍານຽມ</div>
-          <div class="radio-option"><input type="radio" name="q21" value="C. ເຜີຍແຜ່ ແລະ ລາຍງານດ້ວຍຕົວເອງທັນທີ"> C. ເຜີຍແຜ່ ແລະ ລາຍງານດ້ວຍຕົວເອງທັນທີ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-          <div class="radio-option"><input type="radio" name="q21" value="D. ບໍ່ສົນໃຈ"> D. ບໍ່ສົນໃຈ</div>
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q22: 4. ທ່ານໄດ້ຮັບຄໍາສັ່ງ ຈາກຜູ້ຫົວໜ້າ ຂອງທ່ານເພື່ອດໍາເນີນການເຮັດທຸລະກໍາທີ່ອາດ ຈະຂັດກັບກົດລະບຽບຂອງບໍລິສັດ</label>
-          <div class="radio-option"><input type="radio" name="q22" value="A. ກວດເບິ່ງກົດລະບຽບ ແລະ ຖາມຄໍາຖາມຕໍ່ກັບ ຫົວໜ້າຂອງທ່ານ" required> A. ກວດເບິ່ງກົດລະບຽບ ແລະ ຖາມຄໍາຖາມຕໍ່ກັບ ຫົວໜ້າຂອງທ່ານ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-          <div class="radio-option"><input type="radio" name="q22" value="B. ປະຕິບັດຕາມຄຳສັ່ງ"> B. ປະຕິບັດຕາມຄຳສັ່ງ</div>
-          <div class="radio-option"><input type="radio" name="q22" value="C. ບໍ່ສົນໃຈກົດລະບຽບ"> C. ບໍ່ສົນໃຈກົດລະບຽບ</div>
-          <div class="radio-option"><input type="radio" name="q22" value="D. ແຈ້ງເບາະແສ"> D. ແຈ້ງເບາະແສ</div>
-        </div>
-
-
-        <div class="question-block shuffle-item">
-          <label>Q23: 5. ໝູ່ຂໍໃຫ້ເຈົ້າສົ່ງຂໍ້ມູນສ່ວນຕົວຂອງເຈົ້າໃຫ້ຂ້ອຍ</label>
-          <div class="radio-option"><input type="radio" name="q23" value="A. ສົ່ງ" required> A. ສົ່ງ</div>
-          <div class="radio-option"><input type="radio" name="q23" value="B. ຂໍໂທດກັບຫມູ່ເພື່ອນແລະປະຕິເສດ"> B. ຂໍໂທດກັບຫມູ່ເພື່ອນແລະປະຕິເສດ</div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
-          <div class="radio-option"><input type="radio" name="q23" value="C. ຄິດຄ່າບໍລິການ"> C. ຄິດຄ່າບໍລິການ</div>
-          <div class="radio-option"><input type="radio" name="q23" value="D. ປະມວນຜົນ ແລະ ສົ່ງຂໍ້ມູນ"> D. ປະມວນຜົນ ແລະ ສົ່ງຂໍ້ມູນ</div>
-        </div>
-
-        
+      <div class="question-block shuffle-item">
+        <label>Q12: 2. ຜົນໄດ້ຮັບແມ່ນສໍາຄັນກວ່າກົດລະບຽບ</label>
+        <div class="radio-option"><input type="radio" name="q12" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+        <div class="radio-option"><input type="radio" name="q12" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
       </div>
 
 
-      <button type="button" id="submitBtn" onclick="handleFormSubmit()">ສົ່ງບົດເສັງ</button>
-    </form>
+      <div class="question-block shuffle-item">
+        <label>Q13: 3. ຖ້າບໍ່ມີໃຜເບິ່ງເຈົ້າ, ເຈົ້າສາມາດບໍ່ເຮັດຕາມກົດລະບຽບໄດ້</label>
+        <div class="radio-option"><input type="radio" name="q13" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+        <div class="radio-option"><input type="radio" name="q13" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+      </div>
 
-    <div id="resultMessage"></div>
 
-    <script>
-      // ຟັງຊັນສະລັບຂໍ້ສອບ
+      <div class="question-block shuffle-item">
+        <label>Q14: 4. ທຸກຄັ້ງທີ່ເຈົ້າຖືກສັ່ງໃຫ້ໂກງ, ເຈົ້າຈະປະຕິເສດ</label>
+        <div class="radio-option"><input type="radio" name="q14" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+        <div class="radio-option"><input type="radio" name="q14" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
+      </div>
+
+
+      <div class="question-block shuffle-item">
+        <label>Q15: 5. ມັນບໍ່ເປັນຫຍັງທີ່ຈະເອົາທຸລະກິດຄອບຄົວຂອງເຈົ້າມາເຮັດຢູ່ບ່ອນເຮັດວຽກ</label>
+        <div class="radio-option"><input type="radio" name="q15" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+        <div class="radio-option"><input type="radio" name="q15" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+      </div>
+
+
+      <div class="question-block shuffle-item">
+        <label>Q16: 6. ຢ່າເອົາຂໍ້ມູນຂອງລູກຄ້າເມື່ອທ່ານລາອອກຈາກບໍລິສັດ</label>
+        <div class="radio-option"><input type="radio" name="q16" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+        <div class="radio-option"><input type="radio" name="q16" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div>
+      </div>
+
+
+      <div class="question-block shuffle-item">
+        <label>Q17: 7. ຂໍໃຫ້ເພື່ອນຮ່ວມງານກົດບັດເຂົ້າວຽກແທນເພື່ອປິດບັງການມາວຽກຊ້າຂອງເຈົ້າ ມັນເປັນທີ່ຍອມຮັບໄດ້</label>
+        <div class="radio-option"><input type="radio" name="q17" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+        <div class="radio-option"><input type="radio" name="q17" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+      </div>
+
+
+      <div class="question-block shuffle-item">
+        <label>Q18: 8. ບາງຄັ້ງມັນສະຫລາດກວ່າທີ່ຈະປິດບັງຄວາມລົ້ມເຫລວດີກ່ວາທີ່ການລາຍງານມັນກັບຫົວໜ້າຂອງເຈົ້າ</label>
+        <div class="radio-option"><input type="radio" name="q18" value="A. ແມ່ນແລ້ວ" required> A. ແມ່ນແລ້ວ</div>
+        <div class="radio-option"><input type="radio" name="q18" value="B. ບໍ່ແມ່ນ"> B. ບໍ່ແມ່ນ</div> //
+        ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+      </div>
+
+
+      <div class="question-block shuffle-item">
+        <label>Q19: 1. ຂ້າພະເຈົ້າໄດ້ເຫັນເພື່ອນຮ່ວມງານປອມແປງບັນທຶກການຊຳລະຄ່າງວດຂອງລູກຄ້າ</label>
+        <div class="radio-option"><input type="radio" name="q19" value="A. ເຮັດຄືວ່າທ່ານບໍ່ໄດ້ເຫັນ" required> A. ເຮັດຄືວ່າທ່ານບໍ່ໄດ້ເຫັນ
+        </div>
+        <div class="radio-option"><input type="radio" name="q19" value="B. ຊ່ວຍເຫຼືອເພື່ອນຮ່ວມງານຂອງທ່ານ"> B. ຊ່ວຍເຫຼືອເພື່ອນຮ່ວມງານຂອງທ່ານ
+        </div>
+        <div class="radio-option"><input type="radio" name="q19" value="C. ທັນທີທັນໃດລາຍງານກັບຫົວຫນ້າຫຼືພະແນກກວດສອບ"> C. ທັນທີທັນໃດລາຍງານກັບຫົວຫນ້າຫຼືພະແນກກວດສອບ
+        </div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+        <div class="radio-option"><input type="radio" name="q19" value="D. ສັງເກດບິ່ງຫຼັງຈາກການພັກຜ່ອນ"> D. ສັງເກດບິ່ງຫຼັງຈາກການພັກຜ່ອນ
+        </div>
+      </div>
+
+
+      <div class="question-block shuffle-item">
+        <label>Q20: 2. ລູກຄ້າໃນລະຫວ່າງຂະບວນການກວດສອບແຕ່ ເອົາຂອງຂວັນລາຄາແພງ ແລະ ຂໍໃຫ້ຜ່ານ</label>
+        <div class="radio-option"><input type="radio" name="q20" value="A. ຮັບເອົາຂອງຂວັນ" required> A. ຮັບເອົາຂອງຂວັນ
+        </div>
+        <div class="radio-option"><input type="radio" name="q20" value="B. ບັນທຶກແລະລາຍງານໂດຍບໍ່ມີການໄດ້ຮັບ"> B. ບັນທຶກແລະລາຍງານໂດຍບໍ່ມີການໄດ້ຮັບ
+        </div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+        <div class="radio-option"><input type="radio" name="q20" value="C. ສົ່ງຄືນຈະນວນເລັກນ້ອຍ"> C. ສົ່ງຄືນຈະນວນເລັກນ້ອຍ
+        </div>
+        <div class="radio-option"><input type="radio" name="q20" value="D. ຮັບ ໂດຍມີເງື່ອນໄຂ ການອະນຸໂລມ"> D. ຮັບ ໂດຍມີເງື່ອນໄຂ ການອະນຸໂລມ
+        </div>
+      </div>
+
+
+      <div class="question-block shuffle-item">
+        <label>Q21: 3. ລູກຄ້າ ຂໍສຳເນົາຕາຕະລາງການຊໍາຄ່າງສດ 1 ສະບັບ, ແຕ່ຜູ້ຮັບຜິດຊອບປະຕິເສດເພາະວ່າ ພວກເຂົາຍັງຄາວຽກ</label>
+        <div class="radio-option"><input type="radio" name="q21" value="A. ເລື່ອນ" required> A. ເລື່ອນ</div>
+        <div class="radio-option"><input type="radio" name="q21" value="B. ໄລ່ຄ່າທໍານຽມ"> B. ໄລ່ຄ່າທໍານຽມ</div>
+        <div class="radio-option"><input type="radio" name="q21" value="C. ເຜີຍແຜ່ ແລະ ລາຍງານດ້ວຍຕົວເອງທັນທີ"> C. ເຜີຍແຜ່ ແລະ ລາຍງານດ້ວຍຕົວເອງທັນທີ
+        </div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+        <div class="radio-option"><input type="radio" name="q21" value="D. ບໍ່ສົນໃຈ"> D. ບໍ່ສົນໃຈ</div>
+      </div>
+
+
+      <div class="question-block shuffle-item">
+        <label>Q22: 4. ທ່ານໄດ້ຮັບຄໍາສັ່ງ ຈາກຜູ້ຫົວໜ້າ ຂອງທ່ານເພື່ອດໍາເນີນການເຮັດທຸລະກໍາທີ່ອາດ ຈະຂັດກັບກົດລະບຽບຂອງບໍລິສັດ</label>
+        <div class="radio-option"><input type="radio" name="q22" value="A. ກວດເບິ່ງກົດລະບຽບ ແລະ ຖາມຄໍາຖາມຕໍ່ກັບ ຫົວໜ້າຂອງທ່ານ" required> A. ກວດເບິ່ງກົດລະບຽບ ແລະ ຖາມຄໍາຖາມຕໍ່ກັບ ຫົວໜ້າຂອງທ່ານ
+        </div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+        <div class="radio-option"><input type="radio" name="q22" value="B. ປະຕິບັດຕາມຄຳສັ່ງ"> B. ປະຕິບັດຕາມຄຳສັ່ງ</div>
+        <div class="radio-option"><input type="radio" name="q22" value="C. ບໍ່ສົນໃຈກົດລະບຽບ"> C. ບໍ່ສົນໃຈກົດລະບຽບ</div>
+        <div class="radio-option"><input type="radio" name="q22" value="D. ແຈ້ງເບາະແສ"> D. ແຈ້ງເບາະແສ</div>
+      </div>
+
+
+      <div class="question-block shuffle-item">
+        <label>Q23: 5. ໝູ່ຂໍໃຫ້ເຈົ້າສົ່ງຂໍ້ມູນສ່ວນຕົວຂອງເຈົ້າໃຫ້ຂ້ອຍ</label>
+        <div class="radio-option"><input type="radio" name="q23" value="A. ສົ່ງ" required> A. ສົ່ງ</div>
+        <div class="radio-option"><input type="radio" name="q23" value="B. ຂໍໂທດກັບຫມູ່ເພື່ອນແລະປະຕິເສດ"> B. ຂໍໂທດກັບຫມູ່ເພື່ອນແລະປະຕິເສດ
+        </div> // ເລືອກຄຳຕອບທີ່ຖືກຕ້ອງ
+        <div class="radio-option"><input type="radio" name="q23" value="C. ຄິດຄ່າບໍລິການ"> C. ຄິດຄ່າບໍລິການ</div>
+        <div class="radio-option"><input type="radio" name="q23" value="D. ປະມວນຜົນ ແລະ ສົ່ງຂໍ້ມູນ"> D. ປະມວນຜົນ ແລະ ສົ່ງຂໍ້ມູນ
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <button type="button" id="submitBtn" onclick="handleFormSubmit()">ສົ່ງບົດເສັງ</button>
+  </form>
+
+  <div id="resultMessage"></div>
+
+  <script>
+    // ຟັງຊັນສະລັບຂໍ້ສອບ
       window.onload = function() {
         function shuffleContainer(containerId) {
           var container = document.getElementById(containerId);
@@ -328,9 +464,13 @@
         var file = fileInput.files[0];
 
         var buildAndSend = function(fileDataUrl) {
+          var countryCode = form.countryCode.value || "";
+          var normalizedLocal = form.phoneLocal.value.replace(/\s+/g, '');
+          var fullPhone = countryCode + normalizedLocal;
+
           var formObject = {
             studentName: form.studentName.value,
-            phone: form.phone.value,
+            phone: fullPhone,
             gender: form.gender.value,
             year: form.year.value,
             university: form.university.value,
@@ -397,8 +537,9 @@
           resultDiv.className = "fail";
         }
       }
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
 
 
