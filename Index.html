@@ -119,6 +119,19 @@
       text-align: center;
     }
 
+    .error-banner {
+      display: none;
+      margin-bottom: 15px;
+      padding: 16px;
+      background-color: #ffebee;
+      color: #b00020;
+      border: 1px solid #b00020;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1.2em;
+      text-align: center;
+    }
+
     .pass {
       background-color: #d4edda;
       color: #155724;
@@ -155,6 +168,8 @@
     <h2>ບົດສອບເສັງທຶນການສຶກສາ</h2>
     <p>ການສອບເສັງເພື່ອຄັດເລືອກຜູ້ຮັບທຶນ ແລະ ປະກາດຜົນຜ່ານລະບົບອອນໄລນ໌</p>
   </div>
+
+  <div id="errorBanner" class="error-banner"></div>
 
   <form id="testForm">
     <div class="section-title">ຂໍ້ມູນສ່ວນຕົວ</div>
@@ -505,6 +520,10 @@
         var fileInput = document.getElementById('iqProof');
         var file = fileInput.files[0];
 
+        var errorBanner = document.getElementById('errorBanner');
+        errorBanner.style.display = 'none';
+        errorBanner.innerText = '';
+
         var buildAndSend = function(fileDataUrl) {
           var countryCode = form.countryCode.value || "";
           var normalizedLocal = form.phoneLocal.value.replace(/\s+/g, '');
@@ -562,7 +581,9 @@
           .withSuccessHandler(showResult)
           .withFailureHandler(function(error) {
              var message = (error && error.message) ? error.message : "ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃໝ່";
-             alert(message);
+             var errorBanner = document.getElementById('errorBanner');
+             errorBanner.innerText = message;
+             errorBanner.style.display = 'block';
              document.getElementById('submitBtn').disabled = false;
              document.getElementById('submitBtn').innerText = "ສົ່ງບົດເສັງໃໝ່";
           })
@@ -584,4 +605,3 @@
       }
   </script>
 </body>
-
