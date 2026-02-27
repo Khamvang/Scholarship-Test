@@ -5,6 +5,9 @@ function doGet() {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
+const LAO_COUNTRY_CODE = '856';
+const MIN_PHONE_LENGTH = 8;
+
 function getBackgroundImageData() {
   var folderId = '182XU72FN6FtWc9AmzHDfj3DAS6-kRwOn';
   var fileName = 'form_background.png';
@@ -20,6 +23,21 @@ function getBackgroundImageData() {
   return 'data:' + contentType + ';base64,' + encoded;
 }
 
+
+function normalizePhone(value) {
+  if (value === null || value === undefined) {
+    return '';
+  }
+  var digits = String(value).replace(/\D+/g, '');
+  if (digits.indexOf(LAO_COUNTRY_CODE) === 0) {
+    digits = digits.substring(LAO_COUNTRY_CODE.length);
+  }
+  // Remove any leading zeros that may remain after stripping the country code.
+  digits = digits.replace(/^0+/, '');
+  return digits;
+}
+
+
 function processSubmission(formObject) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
@@ -27,10 +45,32 @@ function processSubmission(formObject) {
 
   // ດຶງຂໍ້ມູນທົ່ວໄປ (ບໍ່ມີຄະແນນ)
   var name = formObject.studentName;
-  var phone = formObject.phone;
+  var phone = (formObject.phone || '').toString().trim();
   var gender = formObject.gender;
   var year = formObject.year;
   var uni = formObject.university;
+
+
+  if (!phone) {
+    throw new Error("ກະລຸນາປ້ອນເບີໂທກ່ອນສົ່ງ");
+  }
+  var normalizedPhone = normalizePhone(phone);
+  if (!normalizedPhone) {
+    throw new Error("ເບີໂທບໍ່ຖືກຮູບແບບ, ກະລຸນາກວດຄືນ");
+  }
+  if (normalizedPhone.length < MIN_PHONE_LENGTH) {
+    throw new Error("ເບີໂທບໍ່ຖືກຮູບແບບ, ກະລຸນາກວດຄືນ");
+  }
+
+  var lastRow = sheet.getLastRow();
+  if (lastRow >= 2) {
+    var phoneValues = sheet.getRange(2, 3, lastRow - 1, 1).getValues();
+    for (var i = 0; i < phoneValues.length; i++) {
+      if (normalizePhone(phoneValues[i][0]) === normalizedPhone) {
+        throw new Error("ເບີໂທນີ້ໄດ້ສົ່ງແລ້ວ, ກະລຸນາຢ່າສົ່ງຊ້ຳ");
+      }
+    }
+  }
 
 
 
@@ -123,10 +163,10 @@ function processSubmission(formObject) {
   if (q19Answer === "C. ທັນທີທັນໃດລາຍງານກັບຫົວຫນ້າຫຼືພະແນກກວດສອບ") { q19Points = 1; }
   if (q20Answer === "B. ບັນທຶກແລະລາຍງານໂດຍບໍ່ມີການໄດ້ຮັບ") { q20Points = 1; }
   if (q21Answer === "C. ເຜີຍແຜ່ ແລະ ລາຍງານດ້ວຍຕົວເອງທັນທີ") { q21Points = 1; }
-  if (q22Answer === "A. ກວດເບິ່ງກົດລະບຽບ ແລະ ຖາມຄໍາຖາມຕໍ່ກັບ ຫົວໜ້າຂອງທ່ານ") { q22Points = 1; }
-  if (q23Answer === "B. ຂໍໂທດກັບຫມູ່ເພື່ອນແລະປະຕິເສດ") { q23Points = 1; }
+  if (q22Answer === "A. ກວດເບິ່ງກົດລະບຽບ ແລະ ຕັ້ງຄໍາຖາມຕໍ່ກັບຫົວໜ້າຂອງເຈົ້າ") { q22Points = 1; }
+  if (q23Answer === "B. ຂໍໂທດກັບຫມູ່ເພື່ອນ ແລະປະຕິເສດ") { q23Points = 1; }
 
-  if (q24Answer === "D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ສົນໃຈ") { q24Points = 5; }
+  if (q24Answer === "D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ເຄີຍສົນໃຈ") { q24Points = 5; }
   if (q25Answer === "D. ສານພົວພັນໝູ່ທີ່ເຮັດວຽກບໍລິສັດຄູ່ແຂ່ງ") { q25Points = 5; }
 
 
