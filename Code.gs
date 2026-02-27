@@ -5,6 +5,8 @@ function doGet() {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
+var LAO_COUNTRY_CODE = '856';
+
 function getBackgroundImageData() {
   var folderId = '182XU72FN6FtWc9AmzHDfj3DAS6-kRwOn';
   var fileName = 'form_background.png';
@@ -22,8 +24,8 @@ function getBackgroundImageData() {
 
 function normalizePhone(value) {
   var digits = (value || '').toString().replace(/\D+/g, '');
-  if (digits.indexOf('856') === 0) {
-    digits = digits.substring(3);
+  if (digits.indexOf(LAO_COUNTRY_CODE) === 0) {
+    digits = digits.substring(LAO_COUNTRY_CODE.length);
   }
   while (digits.length > 0 && digits.charAt(0) === '0') {
     digits = digits.substring(1);
