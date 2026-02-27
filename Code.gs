@@ -45,7 +45,7 @@ function processSubmission(formObject) {
   var uni = formObject.university;
 
   var normalizedPhone = normalizePhone(phone);
-  if (!normalizedPhone) {
+  if (!normalizedPhone || normalizedPhone.length < 8) {
     throw new Error("ເບີໂທບໍ່ຖືກຕ້ອງ ຫຼື ຂາດຫາຍ, ກະລຸນາກວດຄືນ");
   }
 
