@@ -169,7 +169,7 @@
     <p>ການສອບເສັງເພື່ອຄັດເລືອກຜູ້ຮັບທຶນ ແລະ ປະກາດຜົນຜ່ານລະບົບອອນໄລນ໌</p>
   </div>
 
-  <div id="errorBanner" class="error-banner"></div>
+  <div id="errorBanner" class="error-banner" role="alert" aria-live="assertive" tabindex="-1"></div>
 
   <form id="testForm">
     <div class="section-title">ຂໍ້ມູນສ່ວນຕົວ</div>
@@ -584,6 +584,8 @@
              var errorBanner = document.getElementById('errorBanner');
              errorBanner.innerText = message;
              errorBanner.style.display = 'block';
+             errorBanner.focus();
+             errorBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
              document.getElementById('submitBtn').disabled = false;
              document.getElementById('submitBtn').innerText = "ສົ່ງບົດເສັງໃໝ່";
           })
