@@ -558,10 +558,11 @@
 
 
       function sendToBackend(formObject) {
-        google.script.run
+       google.script.run
           .withSuccessHandler(showResult)
           .withFailureHandler(function(error) {
-             alert("ເກີດຂໍ້ຜິດພາດ: " + error.message);
+             var message = (error && error.message) ? error.message : "ເກີດຂໍ້ຜິດພາດ ກະລຸນາລອງໃໝ່";
+             alert(message);
              document.getElementById('submitBtn').disabled = false;
              document.getElementById('submitBtn').innerText = "ສົ່ງບົດເສັງໃໝ່";
           })
@@ -583,5 +584,4 @@
       }
   </script>
 </body>
-
 

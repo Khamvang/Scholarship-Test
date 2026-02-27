@@ -27,10 +27,20 @@ function processSubmission(formObject) {
 
   // ດຶງຂໍ້ມູນທົ່ວໄປ (ບໍ່ມີຄະແນນ)
   var name = formObject.studentName;
-  var phone = formObject.phone;
+  var phone = (formObject.phone || '').toString().trim();
   var gender = formObject.gender;
   var year = formObject.year;
   var uni = formObject.university;
+
+  var lastRow = sheet.getLastRow();
+  if (lastRow > 0) {
+    var phoneValues = sheet.getRange(1, 3, lastRow, 1).getValues();
+    for (var i = 0; i < phoneValues.length; i++) {
+      if ((phoneValues[i][0] + '').trim() === phone) {
+        throw new Error("ເບີໂທນີ້ໄດ້ສົ່ງແລ້ວ, ກະລຸນາຢ່າສົ່ງຊ້ຳ");
+      }
+    }
+  }
 
 
 
@@ -160,5 +170,4 @@ function processSubmission(formObject) {
     return "ຂໍສະແດງຄວາມເສຍໃຈ, ທ່ານຍັງບໍ່ຜ່ານໃນຄັ້ງນີ້. ຂອບໃຈທີ່ເຂົ້າຮ່ວມ.";
   }
 }
-
 
