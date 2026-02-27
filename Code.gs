@@ -23,7 +23,7 @@ function getBackgroundImageData() {
 }
 
 function normalizePhone(value) {
-  var digits = (value || '').toString().replace(/\D+/g, '');
+  var digits = String(value || '').replace(/\D+/g, '');
   if (digits.indexOf(LAO_COUNTRY_CODE) === 0) {
     digits = digits.substring(LAO_COUNTRY_CODE.length);
   }
@@ -45,7 +45,7 @@ function processSubmission(formObject) {
 
   var normalizedPhone = normalizePhone(phone);
   if (!normalizedPhone) {
-    throw new Error("ກະລຸນາປ້ອນເບີໂທກ່ອນສົ່ງ");
+    throw new Error("ເບີໂທບໍ່ຖືກຕ້ອງ ຫຼື ຂາດຫາຍ, ກະລຸນາກວດຄືນ");
   }
 
   var lastRow = sheet.getLastRow();
