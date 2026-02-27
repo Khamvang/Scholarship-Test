@@ -23,13 +23,14 @@ function getBackgroundImageData() {
 }
 
 function normalizePhone(value) {
-  var digits = String(value || '').replace(/\D+/g, '');
+  if (value === null || value === undefined) {
+    return '';
+  }
+  var digits = String(value).replace(/\D+/g, '');
   if (digits.indexOf(LAO_COUNTRY_CODE) === 0) {
     digits = digits.substring(LAO_COUNTRY_CODE.length);
   }
-  while (digits.length > 0 && digits.charAt(0) === '0') {
-    digits = digits.substring(1);
-  }
+  digits = digits.replace(/^0+/, '');
   return digits;
 }
 
