@@ -28,7 +28,6 @@ function normalizePhone(value) {
     return '';
   }
   var digits = String(value).replace(/\D+/g, '');
-  digits = digits.replace(/^0+/, '');
   if (digits.indexOf(LAO_COUNTRY_CODE) === 0) {
     digits = digits.substring(LAO_COUNTRY_CODE.length);
   }
@@ -47,9 +46,12 @@ function processSubmission(formObject) {
   var year = formObject.year;
   var uni = formObject.university;
 
+  if (!phone) {
+    throw new Error("ກະລຸນາປ້ອນເບີໂທກ່ອນສົ່ງ");
+  }
   var normalizedPhone = normalizePhone(phone);
   if (!normalizedPhone) {
-    throw new Error("ກະລຸນາປ້ອນເບີໂທກ່ອນສົ່ງ");
+    throw new Error("ເບີໂທບໍ່ຖືກຮູບແບບ, ກະລຸນາກວດຄືນ");
   }
   if (normalizedPhone.length < MIN_PHONE_LENGTH) {
     throw new Error("ເບີໂທບໍ່ຖືກຮູບແບບ, ກະລຸນາກວດຄືນ");
