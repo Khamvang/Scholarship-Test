@@ -32,6 +32,7 @@ function normalizePhone(value) {
   if (digits.indexOf(LAO_COUNTRY_CODE) === 0) {
     digits = digits.substring(LAO_COUNTRY_CODE.length);
   }
+  // Remove any leading zeros that may remain after stripping the country code.
   digits = digits.replace(/^0+/, '');
   return digits;
 }
@@ -47,8 +48,11 @@ function processSubmission(formObject) {
   var uni = formObject.university;
 
   var normalizedPhone = normalizePhone(phone);
-  if (!normalizedPhone || normalizedPhone.length < MIN_PHONE_LENGTH) {
-    throw new Error("ເບີໂທບໍ່ຖືກຕ້ອງ ຫຼື ຂາດຫາຍ, ກະລຸນາກວດຄືນ");
+  if (!normalizedPhone) {
+    throw new Error("ກະລຸນາປ້ອນເບີໂທກ່ອນສົ່ງ");
+  }
+  if (normalizedPhone.length < MIN_PHONE_LENGTH) {
+    throw new Error("ເບີໂທບໍ່ຖືກຮູບແບບ, ກະລຸນາກວດຄືນ");
   }
 
   var lastRow = sheet.getLastRow();
