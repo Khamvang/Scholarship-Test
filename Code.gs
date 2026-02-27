@@ -23,8 +23,6 @@ function getBackgroundImageData() {
 function processSubmission(formObject) {
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
 
-
-
   // ດຶງຂໍ້ມູນທົ່ວໄປ (ບໍ່ມີຄະແນນ)
   var name = formObject.studentName;
   var phone = (formObject.phone || '').toString().trim();
@@ -32,6 +30,18 @@ function processSubmission(formObject) {
   var year = formObject.year;
   var uni = formObject.university;
 
+  var normalizePhone = function(value) {
+    var digits = (value || '').toString().replace(/\D+/g, '');
+    if (digits.indexOf('856') === 0) {
+      digits = digits.substring(3);
+    }
+    while (digits.length > 0 && digits.charAt(0) === '0') {
+      digits = digits.substring(1);
+    }
+    return digits;
+  };
+
+  var normalizedPhone = normalizePhone(phone);
   if (!phone) {
     throw new Error("ກະລຸນາປ້ອນເບີໂທກ່ອນສົ່ງ");
   }
@@ -40,7 +50,7 @@ function processSubmission(formObject) {
   if (lastRow >= 2) {
     var phoneValues = sheet.getRange(2, 3, lastRow - 1, 1).getValues();
     for (var i = 0; i < phoneValues.length; i++) {
-      if ((phoneValues[i][0] + '').trim() === phone) {
+      if (normalizePhone(phoneValues[i][0]) === normalizedPhone) {
         throw new Error("ເບີໂທນີ້ໄດ້ສົ່ງແລ້ວ, ກະລຸນາຢ່າສົ່ງຊ້ຳ");
       }
     }
