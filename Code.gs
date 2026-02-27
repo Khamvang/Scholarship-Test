@@ -5,7 +5,8 @@ function doGet() {
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
-var LAO_COUNTRY_CODE = '856';
+const LAO_COUNTRY_CODE = '856';
+const MIN_PHONE_LENGTH = 8;
 
 function getBackgroundImageData() {
   var folderId = '182XU72FN6FtWc9AmzHDfj3DAS6-kRwOn';
@@ -27,6 +28,7 @@ function normalizePhone(value) {
     return '';
   }
   var digits = String(value).replace(/\D+/g, '');
+  digits = digits.replace(/^0+/, '');
   if (digits.indexOf(LAO_COUNTRY_CODE) === 0) {
     digits = digits.substring(LAO_COUNTRY_CODE.length);
   }
@@ -45,7 +47,7 @@ function processSubmission(formObject) {
   var uni = formObject.university;
 
   var normalizedPhone = normalizePhone(phone);
-  if (!normalizedPhone || normalizedPhone.length < 8) {
+  if (!normalizedPhone || normalizedPhone.length < MIN_PHONE_LENGTH) {
     throw new Error("ເບີໂທບໍ່ຖືກຕ້ອງ ຫຼື ຂາດຫາຍ, ກະລຸນາກວດຄືນ");
   }
 
