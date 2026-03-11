@@ -166,13 +166,13 @@ function processSubmission(formObject) {
   if (q22Answer === "A. ກວດເບິ່ງກົດລະບຽບ ແລະ ຕັ້ງຄໍາຖາມຕໍ່ກັບຫົວໜ້າຂອງເຈົ້າ") { q22Points = 1; }
   if (q23Answer === "B. ຂໍໂທດກັບຫມູ່ເພື່ອນ ແລະປະຕິເສດ") { q23Points = 1; }
 
+  var q24AnswerNormalized = (q24Answer || "").replace("ເຄີຍ", "").replace(/\s+/g, ' ').trim();
   var q24CorrectAnswers = [
     "A. ການນຳໃຊ້ການໂຄສະນາອອນລາຍ",
     "B. ການແນະນຳລູກຄ້າຈາກນາຍໜ້າ ແລະ ຄົນຮູ້ຈັກ",
-    "D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ສົນໃຈ",
-    "D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ເຄີຍສົນໃຈ" // accept legacy phrasing if still present
+    "D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ສົນໃຈ"
   ];
-  if (q24CorrectAnswers.indexOf(q24Answer) !== -1) { q24Points = 5; }
+  if (q24CorrectAnswers.indexOf(q24AnswerNormalized) !== -1) { q24Points = 5; }
 
   var q25CorrectAnswers = [
     "A. ສາຍພົວພັນທາງຄອບຄົວສາຍເລືອດ",
