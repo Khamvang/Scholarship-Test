@@ -213,3 +213,5 @@ function processSubmission(formObject) {
     return "ຂໍສະແດງຄວາມເສຍໃຈ, ທ່ານຍັງບໍ່ຜ່ານໃນຄັ້ງນີ້. ຂອບໃຈທີ່ເຂົ້າຮ່ວມ.";
   }
 }
+
+
