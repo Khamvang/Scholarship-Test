@@ -169,7 +169,8 @@ function processSubmission(formObject) {
   var q24CorrectAnswers = [
     "A. ການນຳໃຊ້ການໂຄສະນາອອນລາຍ",
     "B. ການແນະນຳລູກຄ້າຈາກນາຍໜ້າ ແລະ ຄົນຮູ້ຈັກ",
-    "D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ສົນໃຈ"
+    "D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ສົນໃຈ",
+    "D. ການໂທຫາກຸ່ມລູກຄ້າທີ່ເຄີຍສົນໃຈ" // accept legacy phrasing if still present
   ];
   if (q24CorrectAnswers.indexOf(q24Answer) !== -1) { q24Points = 5; }
 
@@ -211,4 +212,3 @@ function processSubmission(formObject) {
     return "ຂໍສະແດງຄວາມເສຍໃຈ, ທ່ານຍັງບໍ່ຜ່ານໃນຄັ້ງນີ້. ຂອບໃຈທີ່ເຂົ້າຮ່ວມ.";
   }
 }
-
