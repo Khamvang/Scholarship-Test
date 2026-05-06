@@ -78,10 +78,10 @@ function processSubmission(formObject) {
   var iqChoice = formObject.iqScore;
   var iqPoints = 0;
 
-  if (iqChoice === "140+") { iqPoints = 60; }
-  else if (iqChoice === "120–139") { iqPoints = 60; }
-  else if (iqChoice === "110–119") { iqPoints = 55; }
-  else if (iqChoice === "100–109") { iqPoints = 50; }
+  if (iqChoice === "140+") { iqPoints = 50; }
+  else if (iqChoice === "120–139") { iqPoints = 50; }
+  else if (iqChoice === "110–119") { iqPoints = 45; }
+  else if (iqChoice === "100–109") { iqPoints = 40; }
   else if (iqChoice === "80–99") { iqPoints = 0; }
   else if (iqChoice === "60–79") { iqPoints = 0; }
   else if (iqChoice === "ຕ່ຳກວ່າ 60") { iqPoints = 0; }
@@ -124,6 +124,7 @@ function processSubmission(formObject) {
   var q23Answer = formObject.q23;
   var q24Answer = formObject.q24;
   var q25Answer = formObject.q25;
+  var q26Answer = formObject.q26;
 
   var q8Points = 0;
   var q9Points = 0;
@@ -143,13 +144,15 @@ function processSubmission(formObject) {
   var q23Points = 0;
   var q24Points = 0;
   var q25Points = 0;
+  var q26Points = 0;
 
 
 
   // ⚠️ ກະລຸນາປ່ຽນຄຳຕອບທີ່ຖືກຕ້ອງ (ຕົວໜັງສືສີແດງ) ເປັນຄຳຕອບຕົວຈິງຂອງທ່ານ
-  if (q8Answer === "A. 1,200") { q8Points = 10; }
-  if (q9Answer === "D. 14,000") { q9Points = 10; }
-  if (q10Answer === "B. ບໍ່ໄດ້") { q10Points = 10; }
+  if (q8Answer === "A. $264") { q8Points = 10; }
+  if (q9Answer === "B. $7,133") { q9Points = 10; }
+  if (q10Answer === "C. $315") { q10Points = 10; }
+  if (q26Answer === "A. $6,840") { q26Points = 10; }
 
   if (q11Answer === "B. ບໍ່ແມ່ນ") { q11Points = 0.625; }
   if (q12Answer === "B. ບໍ່ແມ່ນ") { q12Points = 0.625; }
@@ -184,8 +187,8 @@ function processSubmission(formObject) {
 
 
   // ລວມຄະແນນ
-  var totalScore = iqPoints                                                                             // 60 ຄະແນນ (ຖ້າໄດ້ IQ 100 ໄດ້ 50, IQ 110 ໄດ້ 55, IQ 120 ໄດ້ 60)
-    + (q8Points + q9Points + q10Points)                                                                 // 30 ຄະແນນ (ຂໍ້ລະ 10 ຄະແນນ)
+  var totalScore = iqPoints                                                                             // 50 ຄະແນນ (ຖ້າໄດ້ IQ 100 ໄດ້ 40, IQ 110 ໄດ້ 45, IQ 120 ໄດ້ 50)
+    + (q8Points + q9Points + q10Points + q26Points)                                                                 // 40 ຄະແນນ (ຂໍ້ລະ 10 ຄະແນນ)
     + (q11Points + q12Points + q13Points + q14Points + q15Points + q16Points + q17Points + q18Points)   // 5 ຄະແນນ (ຂໍ້ລະ 0.625 ຄະແນນ)
     + (q19Points + q20Points + q21Points + q22Points + q23Points)                                       // 5 ຄະແນນ (ຂໍ້ລະ 1 ຄະແນນ)
     + (q24Points + q25Points)                                                                           // 10 ຄະແນນ (ຂໍ້ລະ 5 ຄະແນນ)
@@ -199,7 +202,7 @@ function processSubmission(formObject) {
 
   // ບັນທຶກລົງ Google Sheet
   sheet.appendRow([new Date(), name, phone, gender, year, uni, iqChoice, iqPoints, fileUrl,
-    q8Answer, q8Points, q9Answer, q9Points, q10Answer, q10Points,
+    q8Answer, q8Points, q9Answer, q9Points, q10Answer, q10Points, q26Answer, q26Points,
     q11Answer, q11Points, q12Answer, q12Points, q13Answer, q13Points, q14Answer, q14Points, q15Answer, q15Points, q16Answer, q16Points, q17Answer, q17Points, q18Answer, q18Points,
     q19Answer, q19Points, q20Answer, q20Points, q21Answer, q21Points, q22Answer, q22Points, q23Answer, q23Points,
     q24Answer, q24Points, q25Answer, q25Points,
