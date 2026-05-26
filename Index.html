@@ -237,6 +237,13 @@
         </select>
     </div>
 
+
+    <div class="question-block">
+          <label>ສາຂາວິຊາ</label>
+          <input type="text" name="major" placeholder="ປ້ອນສາຂາວິຊາຂອງທ່ານ" required>
+        </div>
+
+
     <div class="section-title">ການທົດສອບ IQ <a href="https://www.arealme.com/iq-2021/th/" target="_blank"
         rel="noopener noreferrer">ກົດເຂົ້າລີ້ງນີ້</a></div>
 
@@ -559,6 +566,7 @@
             gender: form.gender.value,
             year: form.year.value,
             university: form.university.value,
+            major: form.major.value, // <-- Add this line here
             iqScore: form.iqScore.value,
             imageFileBase64: fileDataUrl,
             imageFileName: file ? file.name : "",
