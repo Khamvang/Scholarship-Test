@@ -49,6 +49,7 @@ function processSubmission(formObject) {
   var gender = formObject.gender;
   var year = formObject.year;
   var uni = formObject.university;
+  var major = formObject.major; // <-- Add this line here
 
 
   if (!phone) {
@@ -201,7 +202,7 @@ function processSubmission(formObject) {
 
 
   // ບັນທຶກລົງ Google Sheet
-  sheet.appendRow([new Date(), name, phone, gender, year, uni, iqChoice, iqPoints, fileUrl,
+  sheet.appendRow([new Date(), name, phone, gender, year, uni, major, iqChoice, iqPoints, fileUrl,
     q8Answer, q8Points, q9Answer, q9Points, q10Answer, q10Points, q26Answer, q26Points,
     q11Answer, q11Points, q12Answer, q12Points, q13Answer, q13Points, q14Answer, q14Points, q15Answer, q15Points, q16Answer, q16Points, q17Answer, q17Points, q18Answer, q18Points,
     q19Answer, q19Points, q20Answer, q20Points, q21Answer, q21Points, q22Answer, q22Points, q23Answer, q23Points,
