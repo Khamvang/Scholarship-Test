@@ -217,4 +217,3 @@ function processSubmission(formObject) {
   }
 }
 
-
