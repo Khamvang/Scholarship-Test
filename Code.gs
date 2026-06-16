@@ -150,10 +150,10 @@ function processSubmission(formObject) {
 
 
   // ⚠️ ກະລຸນາປ່ຽນຄຳຕອບທີ່ຖືກຕ້ອງ (ຕົວໜັງສືສີແດງ) ເປັນຄຳຕອບຕົວຈິງຂອງທ່ານ
-  if (q8Answer === "A. $264") { q8Points = 10; }
-  if (q9Answer === "B. $7,133") { q9Points = 10; }
-  if (q10Answer === "C. $315") { q10Points = 10; }
-  if (q26Answer === "A. $6,840") { q26Points = 10; }
+  if (q8Answer === "B. $1,083") { q8Points = 10; }
+  if (q9Answer === "A. $5,095") { q9Points = 10; }
+  if (q10Answer === "D. $472.5") { q10Points = 10; }
+  if (q26Answer === "B. $13,680") { q26Points = 10; }
 
   if (q11Answer === "B. ບໍ່ແມ່ນ") { q11Points = 0.625; }
   if (q12Answer === "B. ບໍ່ແມ່ນ") { q12Points = 0.625; }
